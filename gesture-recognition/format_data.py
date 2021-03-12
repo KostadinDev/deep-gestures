@@ -5,7 +5,6 @@
 import pandas as pd
 import numpy as np
 import csv
-import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 import sys
 
@@ -38,9 +37,9 @@ def format_data(file_path):
                 try:
                     entry = interpolate(np.array(entry))
                     data.append(entry)
+                    size += 1
                 except:
-                    print('error')
-                size += 1
+                    print('')
             elif row[0] == 'BEGIN':
                 entry = []
             else:
@@ -49,13 +48,12 @@ def format_data(file_path):
     return data
 
 
-# Press the green button in the gutter to run the script.
+# python format_data.py input_location output_location
+
 if __name__ == '__main__':
     input_path = sys.argv[1]
     output_path = sys.argv[2]
-    data_O = format_data(input_path)
-    data_example = pd.DataFrame(data_O[0], columns=['x', 'y', 'z'])
-    np.save(output_path, data_example)
-    print(data_example)
+    data = format_data(input_path)
+    np.save(output_path, data)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
