@@ -26,22 +26,16 @@ if __name__ == '__main__':
 
     print("Testing shapes: ", y_train.shape, y_val.shape, y_test.shape)
 
-
-
     model = models.Sequential([layers.Conv2D(8, (4, 3), padding='same', activation='relu', input_shape=(128, 3, 1)),
                                layers.MaxPool2D((3, 3)),
-                               layers.Dropout(0.1),
                                layers.Conv2D(16, (4, 1), padding='same', activation='relu'),
                                layers.MaxPool2D((3, 1), padding='same'),
-                               layers.Dropout(0.1),
                                layers.Flatten(),
                                layers.Dense(16, activation='relu'),
-                               layers.Dropout(0.1),
                                layers.Dense(4, activation='softmax')])
 
     model.compile(optimizer='adam', loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
                   metrics=['accuracy'])
-
 
     history = model.fit(X_train, y_train, epochs=200, validation_data=(X_val, y_val))
 
