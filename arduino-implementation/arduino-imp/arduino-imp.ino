@@ -1,3 +1,4 @@
+#include <Arduino_LSM9DS1.h>
 #include <TensorFlowLite.h>
 
 #include "tensorflow/lite/micro/all_ops_resolver.h" // provides operations used by interpreter
@@ -5,8 +6,8 @@
 #include "tensorflow/lite/micro/micro_interpreter.h" // code to load and run models
 #include "tensorflow/lite/schema/schema_generated.h" // contains schema for TFlite FlatBuffer
 #include "tensorflow/lite/version.h"// Provides versioning info
-
 #include "tensorflow/lite/micro/testing/micro_test.h" // testing
+
 
 // Our Model
 #include "model.h"
@@ -22,6 +23,19 @@ uint8_t tensor_arena[tensor_arena_size];
 //
 TfLiteTensor* input;
 tflite::ErrorReporter* error_reporter = nullptr;
+
+/**
+ * Data Collection constants
+ */
+ 
+const int SWITCH_PIN = 2;
+int numMotions = 0;
+unsigned long t = 0;
+float x[INPUT_LENGTH/2];
+float y[INPUT_LENGTH/2];
+float z[INPUT_LENGTH/2];
+float t[INPUT_LENGTH/2];
+int delayTime = 10;
 
 void setup() {
   // don't miss serial output
@@ -39,8 +53,8 @@ void setup() {
   //set up model
   const tflite::Model* model = ::tflite::GetModel(model_tflite);
   if(model -> version() != TFLITE_SCHEMA_VERSION){
-    error_reporter->Report("Model version does not match Schema");
-    while(1);
+    while(true)
+      error_reporter->Report("Model version does not match Schema");
   }
 
   tflite::AllOpsResolver resolver;
@@ -52,9 +66,8 @@ void setup() {
   // Allocate tensors (interpreter allocate mem from tensor_arena to the model's tensors
   TfLiteStatus allocate_status = interpreter.AllocateTensors();
   if(allocate_status != kTfLiteOk){
-    while(true) {
+    while(true) 
       error_reporter -> Report("AllocateTensors() failed");
-    }
   }
 
 
@@ -69,10 +82,30 @@ void setup() {
                          "Bad input tensor parameters in model");
     return;
   }
+
+  if(!IMU.begin()){
+    Serial.print("IMU failed to initialize");
+  }
   
 }
 
 void loop() {
+  if(digitalRead(SWITCH_PIN) == HIGH && IMU.accelerationAvailable() && IMU.gyroscopeAvailable() ){
+    t = millis();
+    numData = 0;
+    while(digitalRead(SWITCH_PIN) == HIGH && numData < INPUT_LENGTH/2){
+      IMU.readAcceleration(x,y,z);
+      x[numData] = x;
+      y[numData] = y;
+      z[numData] = z;
+      t[numData] = (float) (millis()-t)
+      numData++;
+      delay(delayTime);
+    }
+  }
+  delay(delayTime);
+
+  
   Serial.print("Test Output\n");
 }
 
