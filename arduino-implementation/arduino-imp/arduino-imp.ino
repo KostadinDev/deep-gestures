@@ -15,7 +15,6 @@
 // Figure out what's going on
 #define DEBUG 0
 
-const unsigned int INPUT_LENGTH = 128;
 
 // Memory allocation
 const int tensor_arena_size = 60*1024;
@@ -27,14 +26,18 @@ tflite::ErrorReporter* error_reporter = nullptr;
 /**
  * Data Collection constants
  */
- 
+const unsigned int INPUT_LENGTH = 128;
 const int SWITCH_PIN = 2;
-int numMotions = 0;
+unsigned int numData = 0;
 unsigned long t = 0;
-float x[INPUT_LENGTH/2];
-float y[INPUT_LENGTH/2];
-float z[INPUT_LENGTH/2];
-float t[INPUT_LENGTH/2];
+float xIn [INPUT_LENGTH/2];
+float yIn [INPUT_LENGTH/2];
+float zIn [INPUT_LENGTH/2];
+float tIn [INPUT_LENGTH/2];
+float xOut [INPUT_LENGTH/2];
+float yOut [INPUT_LENGTH/2];
+float zOut [INPUT_LENGTH/2];
+float tOut [INPUT_LENGTH/2];
 int delayTime = 10;
 
 void setup() {
@@ -86,27 +89,66 @@ void setup() {
   if(!IMU.begin()){
     Serial.print("IMU failed to initialize");
   }
+
+
+
   
 }
 
 void loop() {
-  if(digitalRead(SWITCH_PIN) == HIGH && IMU.accelerationAvailable() && IMU.gyroscopeAvailable() ){
+  
+  if(digitalRead(SWITCH_PIN) == HIGH && IMU.accelerationAvailable()){
+    Serial.println("in switch loop");
     t = millis();
     numData = 0;
+    printArr("t: ", tIn, INPUT_LENGTH);
+    Serial.print("Taking data in");
     while(digitalRead(SWITCH_PIN) == HIGH && numData < INPUT_LENGTH/2){
-      IMU.readAcceleration(x,y,z);
-      x[numData] = x;
-      y[numData] = y;
-      z[numData] = z;
-      t[numData] = (float) (millis()-t)
+      IMU.readAcceleration(xIn[numData],yIn[numData],zIn[numData]);
+
+      Serial.print(" x: ");
+      Serial.print(xIn[numData]);
+      Serial.print(" y: ");
+      Serial.print(yIn[numData]);
+      Serial.print(" z: ");
+      Serial.println(zIn[numData]);
+      
+      tIn[numData] = (float) (millis()-t);
+
       numData++;
       delay(delayTime);
+      
     }
+      // Prime Tout
+    for(int i = 0; i < INPUT_LENGTH; i++){
+      tOut[i] = i/(float)INPUT_LENGTH * tIn[numData - 1];
+    }
+
+    printArr("x: ", xIn, INPUT_LENGTH);
+    printArr("y: ", yIn, INPUT_LENGTH);
+    printArr("z: ", zIn, INPUT_LENGTH);
+    printArr("t: ", tIn, INPUT_LENGTH);
+    printArr("x again: ", xIn, INPUT_LENGTH);
+    linInter(xIn, tIn, numData, xOut, tOut, INPUT_LENGTH);
+    //linInter(yIn, tIn, numData, yOut, tOut, INPUT_LENGTH);
+    //linInter(zIn, tIn, numData, zOut, tOut, INPUT_LENGTH);
+
+    printArr("x: ", xIn, INPUT_LENGTH);
+    printArr("y: ", yIn, INPUT_LENGTH);
+    printArr("z: ", zIn, INPUT_LENGTH);
+    printArr("t: ", tIn, INPUT_LENGTH);
+    
+    printArr("x Interpolated: ", xOut, INPUT_LENGTH);
+    printArr("y Interpolated: ", yOut, INPUT_LENGTH);
+    printArr("z Interpolated: ", zOut, INPUT_LENGTH);
+    printArr("t new: ", tOut, INPUT_LENGTH);
+    Serial.print("finished");
   }
   delay(delayTime);
 
-  
-  Serial.print("Test Output\n");
+  Serial.print(" 0");
+  Serial.print("IMU status: ");
+Serial.println(IMU.accelerationAvailable());
 }
 
 
@@ -118,19 +160,34 @@ void loop() {
  *  Linear interpolation functions
  *  
  */
-void linInter(double fi[], double ti[], unsigned int szeIn, double fo[], double to[], int szeOut){
+void linInter(float fi[], float ti[], unsigned int szeIn, float fo[], float to[], int szeOut){
   for(int i = 0; i < szeOut; i++){
     fo[i] = interPt(fi, ti, szeIn, to[i]);
   }
 }
 
-double interPt(double f[], double t[], unsigned int arrSze, double tIn){
+double interPt(float f[], float t[], unsigned int arrSze, float tIn){
+  if(tIn < t[0])
+    return(f[0]);
   // assume array is sorted
   int i;
   for(i = 0; i < arrSze; i++){
     if(tIn > t[i]) break;
   }
-  double out = (f[i]*(t[i+1] - tIn) + f[i+1]*(tIn - t[i]))/(t[i+1] - t[i]);
+  i--;
+  float out = (f[i]*(t[i+1] - tIn) + f[i+1]*(tIn - t[i]))/(t[i+1] - t[i]);
 
   return(out);
+}
+
+
+void printArr(String label, float arr[], unsigned int arrSize ){
+  Serial.println(label);
+  for(int i = 0; i < arrSize; i++){
+    Serial.print(i);
+    Serial.print(": ");
+    Serial.println(arr[i],5);
+  }
+
+  Serial.println("done\n\n");
 }
