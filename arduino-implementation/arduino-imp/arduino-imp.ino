@@ -1,4 +1,4 @@
-#include <Arduino_LSM9DS1.h>
+  #include <Arduino_LSM9DS1.h>
 #include <TensorFlowLite.h>
 
 #include "tensorflow/lite/micro/all_ops_resolver.h" // provides operations used by interpreter
@@ -16,8 +16,15 @@
 #define DEBUG 0
 
 
+namespace {
+tflite::MicroInterpreter* interpreter = nullptr;
+
+
+
+}
+
 // Memory allocation
-const int tensor_arena_size = 60*1024;
+const int tensor_arena_size = 93*1024;
 uint8_t tensor_arena[tensor_arena_size];
 //
 TfLiteTensor* input;
@@ -26,19 +33,23 @@ tflite::ErrorReporter* error_reporter = nullptr;
 /**
  * Data Collection constants
  */
+unsigned int numData = 0;
 const unsigned int INPUT_LENGTH = 128;
 const int SWITCH_PIN = 2;
-unsigned int numData = 0;
 unsigned long t = 0;
-float xIn [INPUT_LENGTH/2];
-float yIn [INPUT_LENGTH/2];
-float zIn [INPUT_LENGTH/2];
-float tIn [INPUT_LENGTH/2];
-float xOut [INPUT_LENGTH/2];
-float yOut [INPUT_LENGTH/2];
-float zOut [INPUT_LENGTH/2];
-float tOut [INPUT_LENGTH/2];
+float xIn [INPUT_LENGTH];
+float yIn [INPUT_LENGTH];
+float zIn [INPUT_LENGTH];
+float tIn [INPUT_LENGTH];
+float xOut [INPUT_LENGTH];
+float yOut [INPUT_LENGTH];
+float zOut [INPUT_LENGTH];
+float tOut [INPUT_LENGTH];
+
+float TFin [INPUT_LENGTH][3];
 int delayTime = 10;
+
+int i;
 
 void setup() {
   // don't miss serial output
@@ -60,14 +71,22 @@ void setup() {
       error_reporter->Report("Model version does not match Schema");
   }
 
-  tflite::AllOpsResolver resolver;
+  //tflite::AllOpsResolver resolver;
+  static tflite::MicroMutableOpResolver<4> micro_op_resolver;  // NOLINT
+  micro_op_resolver.AddConv2D();
+  micro_op_resolver.AddMaxPool2D();
+  //flatten
+  micro_op_resolver.AddFullyConnected();
+  micro_op_resolver.AddSoftmax();
 
   // instantiate interpreter
-  tflite::MicroInterpreter interpreter(model, resolver, tensor_arena, tensor_arena_size, error_reporter);
- 
+  //tflite::MicroInterpreter interpreter(model, resolver, tensor_arena, tensor_arena_size, error_reporter);
+ static tflite::MicroInterpreter static_interpreter(
+      model, micro_op_resolver, tensor_arena, tensor_arena_size, error_reporter);
+  interpreter = &static_interpreter;
 
   // Allocate tensors (interpreter allocate mem from tensor_arena to the model's tensors
-  TfLiteStatus allocate_status = interpreter.AllocateTensors();
+  TfLiteStatus allocate_status = interpreter->AllocateTensors();
   if(allocate_status != kTfLiteOk){
     while(true) 
       error_reporter -> Report("AllocateTensors() failed");
@@ -76,7 +95,7 @@ void setup() {
 
 
   // obtain pointer to model's input tensor
-    input = interpreter.input(0);
+    input = interpreter->input(0);
   if ((input->dims->size != 4) || (input->dims->data[0] != 1) ||
       (input->dims->data[1] != 128) ||
       (input->dims->data[2] != 3) ||
@@ -101,9 +120,7 @@ void loop() {
     Serial.println("in switch loop");
     t = millis();
     numData = 0;
-    printArr("t: ", tIn, INPUT_LENGTH);
-    Serial.print("Taking data in");
-    while(digitalRead(SWITCH_PIN) == HIGH && numData < INPUT_LENGTH/2){
+    while(digitalRead(SWITCH_PIN) == HIGH && numData < INPUT_LENGTH){
       IMU.readAcceleration(xIn[numData],yIn[numData],zIn[numData]);
 
       Serial.print(" x: ");
@@ -123,32 +140,58 @@ void loop() {
     for(int i = 0; i < INPUT_LENGTH; i++){
       tOut[i] = i/(float)INPUT_LENGTH * tIn[numData - 1];
     }
-
+    
     printArr("x: ", xIn, INPUT_LENGTH);
     printArr("y: ", yIn, INPUT_LENGTH);
     printArr("z: ", zIn, INPUT_LENGTH);
     printArr("t: ", tIn, INPUT_LENGTH);
     printArr("x again: ", xIn, INPUT_LENGTH);
+
+    
     linInter(xIn, tIn, numData, xOut, tOut, INPUT_LENGTH);
-    //linInter(yIn, tIn, numData, yOut, tOut, INPUT_LENGTH);
-    //linInter(zIn, tIn, numData, zOut, tOut, INPUT_LENGTH);
+    linInter(yIn, tIn, numData, yOut, tOut, INPUT_LENGTH);
+    linInter(zIn, tIn, numData, zOut, tOut, INPUT_LENGTH);
 
     printArr("x: ", xIn, INPUT_LENGTH);
     printArr("y: ", yIn, INPUT_LENGTH);
     printArr("z: ", zIn, INPUT_LENGTH);
     printArr("t: ", tIn, INPUT_LENGTH);
     
+    
     printArr("x Interpolated: ", xOut, INPUT_LENGTH);
     printArr("y Interpolated: ", yOut, INPUT_LENGTH);
     printArr("z Interpolated: ", zOut, INPUT_LENGTH);
     printArr("t new: ", tOut, INPUT_LENGTH);
+
+    hstack(xOut,yOut,zOut,TFin, INPUT_LENGTH);
+    input -> data.f = *TFin;
+    Serial.println(*input->data.f);
+
+    Serial.println("Tensor Loaded");
+    TfLiteStatus invoke_status = interpreter->Invoke();
+        Serial.println("Invoked inference");
+  if (invoke_status != kTfLiteOk) {
+    TF_LITE_REPORT_ERROR(error_reporter, "Invoke failed on index: %d\n");
+    return;
+    Serial.println("Error tets passed");
+
+    float *gesture_pred = interpreter->output(0)->data.f;
+    Serial.println("Output assigned");
+    Serial.print("Prediction 1: ");
+    Serial.print(gesture_pred[0]);
+    Serial.print("          Prediction 2: ");
+    Serial.print(gesture_pred[1]);
+    Serial.print("          Prediction 3: ");
+    Serial.print(gesture_pred[2]);
+  }
+
     Serial.print("finished");
   }
   delay(delayTime);
 
   Serial.print(" 0");
   Serial.print("IMU status: ");
-Serial.println(IMU.accelerationAvailable());
+  Serial.println(IMU.accelerationAvailable());
 }
 
 
@@ -161,33 +204,66 @@ Serial.println(IMU.accelerationAvailable());
  *  
  */
 void linInter(float fi[], float ti[], unsigned int szeIn, float fo[], float to[], int szeOut){
+  Serial.println("----------------------------");
+  Serial.println("----------------------------");
+  Serial.println("----------------------------");
+
+  Serial.println("----------------------------");
+  Serial.println("----------------------------");
+  Serial.println("----------------------------");
   for(int i = 0; i < szeOut; i++){
     fo[i] = interPt(fi, ti, szeIn, to[i]);
   }
 }
+
 
 double interPt(float f[], float t[], unsigned int arrSze, float tIn){
   if(tIn < t[0])
     return(f[0]);
   // assume array is sorted
   int i;
+  float prev = 0;
   for(i = 0; i < arrSze; i++){
-    if(tIn > t[i]) break;
+    if(tIn < t[i] && tIn > prev ) break;
+    prev = t[i];
   }
   i--;
-  float out = (f[i]*(t[i+1] - tIn) + f[i+1]*(tIn - t[i]))/(t[i+1] - t[i]);
-
-  return(out);
+  return((f[i]*(t[i+1] - tIn) + f[i+1]*(tIn - t[i]))/(t[i+1] - t[i]));
 }
 
 
 void printArr(String label, float arr[], unsigned int arrSize ){
   Serial.println(label);
+  
+  Serial.print("[ ");
   for(int i = 0; i < arrSize; i++){
+
+
+    Serial.print(arr[i],5);
+    if(i != arrSize - 1) Serial.print(", ");
+
+  }
+  Serial.println("]");
+  /*
+  for(int i = 0; i < arrSize/2; i++){
     Serial.print(i);
     Serial.print(": ");
-    Serial.println(arr[i],5);
+    Serial.print(arr[i],5);
+    Serial.print("        ");
+    Serial.print(i + arrSize/2);
+    Serial.print(": ");
+    Serial.println(arr[i+arrSize/2],5);
   }
-
+*/
   Serial.println("done\n\n");
+}
+
+
+void hstack(float x[], float y[], float z[], float output[][3], unsigned int arrLen){
+
+    for (int i = 0; i < arrLen; i++){
+      output[i][0] = x[i];
+      output[i][1] = y[i];
+      output[i][2] = z[i];
+    }
 }
