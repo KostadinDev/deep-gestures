@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
-from tensorflow.keras import datasets, layers, models
+from tensorflow.keras import layers, models
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
@@ -18,6 +18,7 @@ if __name__ == '__main__':
     X = np.vstack(X).astype('float32')
     X = np.reshape(X, (int(len(X) / 128), 128, 3, -1))
 
+    # 60% for training, 20% for validation, 20% testing
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
 
     X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.25, random_state=1)
@@ -26,30 +27,30 @@ if __name__ == '__main__':
 
     print("Testing shapes: ", y_train.shape, y_val.shape, y_test.shape)
 
-
-
     model = models.Sequential([layers.Conv2D(8, (4, 3), padding='same', activation='relu', input_shape=(128, 3, 1)),
                                layers.MaxPool2D((3, 3)),
-                               layers.Dropout(0.1),
                                layers.Conv2D(16, (4, 1), padding='same', activation='relu'),
                                layers.MaxPool2D((3, 1), padding='same'),
-                               layers.Dropout(0.1),
                                layers.Flatten(),
                                layers.Dense(16, activation='relu'),
-                               layers.Dropout(0.1),
                                layers.Dense(4, activation='softmax')])
 
     model.compile(optimizer='adam', loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
                   metrics=['accuracy'])
 
+    history = model.fit(X_train, y_train, epochs=50, validation_data=(X_val, y_val))
 
-    history = model.fit(X_train, y_train, epochs=200, validation_data=(X_val, y_val))
-
-    plt.plot(history.history['accuracy'], label='accuracy')
-    plt.plot(history.history['val_accuracy'], label='val_accuracy')
-    plt.xlabel('Epoch')
-    plt.ylabel('Accuracy')
-    plt.ylim([0.5, 1])
-    plt.legend(loc='lower right')
+    # plt.plot(history.history['accuracy'], label='accuracy')
+    # plt.plot(history.history['val_accuracy'], label='val_accuracy')
+    # plt.xlabel('Epoch')
+    # plt.ylabel('Accuracy')
+    # plt.legend(loc='lower right')
+    # plt.show()
 
     test_loss, test_acc = model.evaluate(X_test, y_test, verbose=2)
+    converter = tf.lite.TFLiteConverter.from_keras_model(model)
+    tflite_model = converter.convert()
+
+    with open('model.tflite', 'wb') as f:
+        f.write(tflite_model)
+

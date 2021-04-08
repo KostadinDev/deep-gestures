@@ -6,10 +6,12 @@ import pandas as pd
 import numpy as np
 import csv
 from scipy.interpolate import interp1d
+from mpl_toolkits import mplot3d
 import sys
+import matplotlib.pyplot as plt
 
 
-# Takes in a gesture entry and interpolates 150 data points
+# Takes in a gesture entry and interpolates 128 data points
 
 def interpolate(entry):
     time = entry[:, 0]
@@ -22,6 +24,12 @@ def interpolate(entry):
     interpolated_x = fx(new_time)
     interpolated_y = fy(new_time)
     interpolated_z = fz(new_time)
+    #
+    # fig = plt.figure(figsize=(10, 7))
+    # ax = plt.axes(projection='3d')
+    # ax.scatter3D(x, y, z)
+    # ax.scatter3D(interpolated_x, interpolated_y, interpolated_z)
+    # plt.show()
     interpolated_entry = np.array([interpolated_x, interpolated_y, interpolated_z]).T
     return interpolated_entry
 
@@ -36,6 +44,7 @@ def format_data(file_path, label):
             if row[0] == 'EXIT':
                 try:
                     entry = interpolate(np.array(entry))
+                    break;
                     data.append(np.array([entry, label]))
                 except:
                     print('')
