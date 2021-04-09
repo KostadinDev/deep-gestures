@@ -28,7 +28,7 @@ namespace { // for scope
   TfLiteTensor* input = nullptr;
   TfLiteTensor* output = nullptr;
 
-  constexpr int tensor_arena_size = 60*1024;
+  constexpr int tensor_arena_size = 15*1024;
   uint8_t tensor_arena[tensor_arena_size];
 
 }
@@ -44,7 +44,12 @@ namespace { // for scope
  */
 unsigned int numData = 0;
 const unsigned int INPUT_LENGTH = 128;
-const int SWITCH_PIN = 2;
+const unsigned int SWITCH_PIN = 2;
+const unsigned int O_PIN = 3;
+const unsigned int LR_PIN = 4;
+const unsigned int RL_PIN = 5;
+const unsigned int SPIN_PIN = 6;
+const unsigned int THROW_PIN = 7;
 unsigned long t = 0;
 float xIn [INPUT_LENGTH]; //Takes from IMU
 float yIn [INPUT_LENGTH];
@@ -87,28 +92,13 @@ void setup() {
 
   // Set up resolver
   static tflite::AllOpsResolver resolver;
-  //Microresolver added in later
-  /*static tflite::MicroMutableOpResolver<4> micro_op_resolver;  // NOLINT
- 
-  micro_op_resolver.AddConv2D();
-  micro_op_resolver.AddMaxPool2D();
-  //flatten
-  micro_op_resolver.AddFullyConnected();
-  micro_op_resolver.AddSoftmax();
-  */
 
   // instantiate interpreter
   static tflite::MicroInterpreter static_interpreter(
       model, resolver, tensor_arena, tensor_arena_size, error_reporter);
   interpreter = &static_interpreter;
-          //tflite::MicroInterpreter interpreter(model, resolver, tensor_arena, tensor_arena_size, error_reporter);
-         //Static interpretter as compared to normal interpreter
-          /*static tflite::MicroInterpreter static_interpreter(
-              model, micro_op_resolver, tensor_arena, tensor_arena_size, error_reporter);
-            interpreter = &static_interpreter;
-          */
+
   // Allocate tensors (interpreter allocate mem from tensor_arena to the model's tensors
-  //TfLiteStatus allocate_status = interpreter.AllocateTensors();
   TfLiteStatus allocate_status = interpreter->AllocateTensors();
   if(allocate_status != kTfLiteOk){
     while(true) 
@@ -118,7 +108,6 @@ void setup() {
 
 
   // obtain pointer to model's input tensor
-    //input = interpreter.input(0);
     input = interpreter->input(0);
   if ((input->dims->size != 4) || (input->dims->data[0] != 1) ||
       (input->dims->data[1] != 128) ||
@@ -134,9 +123,12 @@ void setup() {
     Serial.print("IMU failed to initialize");
   }
 
+  pinMode(O_PIN, OUTPUT);
+  pinMode(LR_PIN, OUTPUT);
+  pinMode(RL_PIN, OUTPUT);
+  pinMode(SPIN_PIN, OUTPUT);
+  pinMode(THROW_PIN, OUTPUT);
 
-
-  
 }
 
 void loop() {
@@ -173,16 +165,16 @@ void loop() {
     linInter(zIn, tIn, numData, zOut, tOut, INPUT_LENGTH);
 
     //vector printing for visualization
-    printArr("x: ", xIn, INPUT_LENGTH);
-    printArr("y: ", yIn, INPUT_LENGTH);
-    printArr("z: ", zIn, INPUT_LENGTH);
-    printArr("t: ", tIn, INPUT_LENGTH);
+    //printArr("x: ", xIn, INPUT_LENGTH);
+    //printArr("y: ", yIn, INPUT_LENGTH);
+    //printArr("z: ", zIn, INPUT_LENGTH);
+    //printArr("t: ", tIn, INPUT_LENGTH);
     
     
-    printArr("x Interpolated: ", xOut, INPUT_LENGTH);
-    printArr("y Interpolated: ", yOut, INPUT_LENGTH);
-    printArr("z Interpolated: ", zOut, INPUT_LENGTH);
-    printArr("t new: ", tOut, INPUT_LENGTH);
+    //printArr("x Interpolated: ", xOut, INPUT_LENGTH);
+    //printArr("y Interpolated: ", yOut, INPUT_LENGTH);
+    //printArr("z Interpolated: ", zOut, INPUT_LENGTH);
+    //printArr("t new: ", tOut, INPUT_LENGTH);
 
     // combine arrays & load tensor
     hstack(xOut,yOut,zOut,TFin, INPUT_LENGTH);
@@ -193,12 +185,12 @@ void loop() {
           in++;
       }
     }
-    //input -> data.f = *TFin;
-    Serial.println(*input->data.f);
+
+
     Serial.println("Tensor Loaded");
 
     // Perform inference
-                //interpreter -> ResetVariableTensors();
+
     TfLiteStatus invoke_status = interpreter->Invoke();
         Serial.println("Invoked inference");
   if (invoke_status != kTfLiteOk) {
@@ -212,19 +204,58 @@ void loop() {
     Serial.println("Output assigned");
     Serial.print("Prediction 1: ");
     Serial.print(gesture_pred[0]);
-    Serial.print("          Prediction 2: ");
+    Serial.print("    Prediction 2: ");
     Serial.print(gesture_pred[1]);
-    Serial.print("          Prediction 3: ");
+    Serial.print("    Prediction 3: ");
     Serial.print(gesture_pred[2]);
+    Serial.print("    Prediction 4: ");
+    Serial.print(gesture_pred[3]);
+    Serial.print("    Prediction 5: ");
+    Serial.println(gesture_pred[4]);
+
+    Serial.println("1");
+    if(gesture_pred[0] > .5){
+      analogWrite(O_PIN,gesture_pred[0]*255);
+      //digitalWrite(O_PIN, HIGH);
+    }
+    Serial.println("2");
+    if(gesture_pred[1] > .5){
+      analogWrite(LR_PIN,gesture_pred[1]*255);
+      //digitalWrite(LR_PIN, HIGH);
+    }
+    Serial.println("3");
+    if(gesture_pred[2] > .5){
+      analogWrite(RL_PIN,gesture_pred[2]*255);
+      //digitalWrite(RL_PIN, HIGH);
+    }
+    Serial.println("4");
+    if(gesture_pred[3] > .5){
+      analogWrite(SPIN_PIN,gesture_pred[3]*255);
+      //digitalWrite(SPIN_PIN, HIGH);
+    }
+    Serial.println("5");
+    if(gesture_pred[4] > .5){
+      digitalWrite(THROW_PIN, HIGH);
+    }
+    Serial.println("6");
+    delay(1000);
+    Serial.println("7");
+    analogWrite(O_PIN,0);
+    Serial.println("8");
+    analogWrite(LR_PIN,0);
+    Serial.println("9");
+    analogWrite(RL_PIN,0);
+    Serial.println("10");
+    analogWrite(SPIN_PIN,0);
+    Serial.println("11");
+    digitalWrite(THROW_PIN,LOW);
+    Serial.println("12");
   }
 
-    Serial.print("finished");
+    Serial.println("finished");
   }
   delay(delayTime);
 
-  //Serial.print(" 0");
-  //Serial.print("IMU status: ");
-  //Serial.println(IMU.accelerationAvailable());
 }
 
 
