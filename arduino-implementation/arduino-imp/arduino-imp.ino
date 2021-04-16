@@ -3,6 +3,7 @@
  */
 #include <Arduino_LSM9DS1.h>
 
+#include "primer.h"
 #include <TensorFlowLite.h>
 #include "tensorflow/lite/micro/all_ops_resolver.h" // provides operations used by interpreter
 #include "tensorflow/lite/micro/micro_error_reporter.h" // outputs debug info
@@ -267,33 +268,9 @@ void loop() {
  *  Linear interpolation functions
  *  
  */
-void linInter(float fi[], float ti[], unsigned int szeIn, float fo[], float to[], int szeOut){
-  Serial.println("----------------------------");
-  Serial.println("----------------------------");
-  Serial.println("----------------------------");
-
-  Serial.println("----------------------------");
-  Serial.println("----------------------------");
-  Serial.println("----------------------------");
-  for(int i = 0; i < szeOut; i++){
-    fo[i] = interPt(fi, ti, szeIn, to[i]);
-  }
-}
 
 
-double interPt(float f[], float t[], unsigned int arrSze, float tIn){
-  if(tIn < t[0])
-    return(f[0]);
-  // assume array is sorted
-  int i;
-  float prev = 0;
-  for(i = 0; i < arrSze; i++){
-    if(tIn < t[i] && tIn > prev ) break;
-    prev = t[i];
-  }
-  i--;
-  return((f[i]*(t[i+1] - tIn) + f[i+1]*(tIn - t[i]))/(t[i+1] - t[i]));
-}
+
 
 
 void printArr(String label, float arr[], unsigned int arrSize ){
@@ -320,14 +297,4 @@ void printArr(String label, float arr[], unsigned int arrSize ){
   }
 */
   Serial.println("done\n\n");
-}
-
-
-void hstack(float x[], float y[], float z[], float output[][3], unsigned int arrLen){
-
-    for (int i = 0; i < arrLen; i++){
-      output[i][0] = x[i];
-      output[i][1] = y[i];
-      output[i][2] = z[i];
-    }
 }
