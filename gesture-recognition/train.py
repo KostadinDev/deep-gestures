@@ -33,9 +33,9 @@ if __name__ == '__main__':
                                layers.MaxPool2D((3, 1), padding='same'),
                                layers.Flatten(),
                                layers.Dense(16, activation='relu'),
-                               layers.Dense(4, activation='softmax')])
+                               layers.Dense(1, activation='sigmoid')])
 
-    model.compile(optimizer='adam', loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+    model.compile(optimizer='adam', loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
                   metrics=['accuracy'])
 
     history = model.fit(X_train, y_train, epochs=50, validation_data=(X_val, y_val))
