@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ad8804-c3b7-48ff-b2e9-6dfd0faf027c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/model.tflite" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +128,7 @@
       <workItem from="1617914415908" duration="4721000" />
       <workItem from="1618036510441" duration="21000" />
       <workItem from="1619804809872" duration="150000" />
-      <workItem from="1619805911222" duration="4276000" />
+      <workItem from="1619805911222" duration="5089000" />
     </task>
     <servers />
   </component>
@@ -150,10 +148,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="235" y="313" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617995155537">
+    <state x="235" y="313" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1619813764946">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="235" y="313" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617995155537" />
+    <state x="235" y="313" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619813764946" />
     <state x="2155" y="313" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1616089337178" />
     <state x="667" y="434" key="FileChooserDialogImpl" timestamp="1618036529960">
       <screen x="0" y="0" width="1920" height="1040" />
