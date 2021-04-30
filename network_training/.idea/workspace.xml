@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ad8804-c3b7-48ff-b2e9-6dfd0faf027c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.ipynb_checkpoints/model-conversion-checkpoint.ipynb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/model.tflite" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +87,9 @@
       <module name="gesture-recognition" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -129,6 +132,7 @@
       <workItem from="1618036510441" duration="21000" />
       <workItem from="1619804809872" duration="150000" />
       <workItem from="1619805911222" duration="5815000" />
+      <workItem from="1619818101256" duration="74000" />
     </task>
     <servers />
   </component>
@@ -153,10 +157,11 @@
     </state>
     <state x="235" y="313" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619813764946" />
     <state x="2155" y="313" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1616089337178" />
-    <state x="667" y="434" key="FileChooserDialogImpl" timestamp="1618036529960">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2587" y="434" key="FileChooserDialogImpl" timestamp="1619818149236">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="667" y="434" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618036529960" />
+    <state x="2587" y="434" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1619818149236" />
     <state width="1877" height="274" key="GridCell.Tab.0.bottom" timestamp="1615525515855">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
