@@ -12,7 +12,6 @@ import matplotlib.pyplot as plt
 
 
 # Takes in a gesture entry and interpolates 128 data points
-
 def interpolate(entry):
     time = entry[:, 0]
     x, y, z = entry[:, 1], entry[:, 2], entry[:, 3]
@@ -24,12 +23,6 @@ def interpolate(entry):
     interpolated_x = fx(new_time)
     interpolated_y = fy(new_time)
     interpolated_z = fz(new_time)
-    #
-    # fig = plt.figure(figsize=(10, 7))
-    # ax = plt.axes(projection='3d')
-    # ax.scatter3D(x, y, z)
-    # ax.scatter3D(interpolated_x, interpolated_y, interpolated_z)
-    # plt.show()
     interpolated_entry = np.array([interpolated_x, interpolated_y, interpolated_z]).T
     return interpolated_entry
 
@@ -56,7 +49,6 @@ def format_data(file_path, label):
 
 
 # python format_data.py input_location output_location label
-
 if __name__ == '__main__':
     input_path = sys.argv[1]
     output_path = sys.argv[2]

@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ad8804-c3b7-48ff-b2e9-6dfd0faf027c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/format_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/format_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model.tflite" beforeDir="false" afterPath="$PROJECT_DIR$/model.tflite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,9 +89,6 @@
       <module name="gesture-recognition" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -132,6 +130,7 @@
       <workItem from="1617914415908" duration="4721000" />
       <workItem from="1618036510441" duration="21000" />
       <workItem from="1619804809872" duration="150000" />
+      <workItem from="1619805911222" duration="4276000" />
     </task>
     <servers />
   </component>
