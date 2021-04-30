@@ -23,6 +23,7 @@ The data processing script <b>network_training/format_data.py</b> converts the o
 	>cd network_training/
 3. For each different gesture run the command below specifying th collected data, where to save the processed output, and  the label of the gesture. Keep in mind the label should be numeric. There are example files in network_training/collected_data and network_training/processed_data.
 	>python format_data.py <collected_data_csv> <saving_location> \<label>
+	
 	Example:
 	>python format_data.py collected_data/collected_LRdash.csv processed_data/processed_LRdash.npy 0
 
@@ -35,7 +36,8 @@ By this point you should have a folder with processed data with .npy files. Now 
 	>cd network_training/
 2. Run the training script
     >python train.py <processed_data_folder> <model_saving_location_folder> \<label>
-    Example:
+    
+	Example:
 	>python train.py processed_data/ lite_models/
 
 ## Model Conversion
