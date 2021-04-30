@@ -1,5 +1,9 @@
 # Gesture Recognition Pipeline
 
+Complete pipeline to create an application that can recognize custom gestures made on an Arduino Nano BLE Sense.
+
+The pipeline includes data collection on an Arduino, data processing, neural network training, model conversion, model deployment on Arduino, and sending the gesure prediction to a server.
+
 ## Collect Data
 
 In order to collect data, we used a basic triggering system in order to tell the arduino when to
