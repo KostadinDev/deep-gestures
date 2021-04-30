@@ -2,16 +2,20 @@
 
 Complete pipeline to create an application that can recognize custom gestures made on an Arduino Nano BLE Sense.
 
+<<<<<<< HEAD
 The gestures are detected with deep learning using accelerometer data. 
 
 The pipeline includes data collection on an Arduino, data processing, neural network training, model conversion, model deployment on Arduino. Additionally, there is a section on how to send the predicted gestures to a server via bluetooth.
+=======
+The pipeline includes data collection on an Arduino, data processing, neural network training, model conversion, model deployment on Arduino, and sending the gesure prediction to a server.
+>>>>>>> 673829674a9404fb3d2570568348a80a66dd0406
 
 ## Collect Data
 
 In order to collect data, we used a basic triggering system in order to tell the arduino when to
 collect the data. From there it was printed to the Serial Port, detected and saved as a csv using PuTTY.
 
-#### Steps
+### Steps
 1. Using an Arduino Nano 33 BLE Sense and a button, create a circuit that will connect the vOut pin
 to an input datapin whenever the button is depressed. This acts as a trigger for the start of the movement.
 2. Run the script provided within 'datacollection'. This script prints the output of the IMU within the
@@ -53,14 +57,16 @@ After obtaining the Tensforflow Lite model as .tflite file you have to convert i
 1. Place the folder with tensorflow lite models in Google Drive
 2. Open the convert_model.ipynb jupyter notebook in Google Colab
 3. Run the code blocks in the Colab notebook and a model.cc file will be generated
-4. Place the model.cc file in your Arduino project
+4. Now you should have a model.cc file containing a `model_tflite[]` unsigned char array and its size. You will need to create a new file named `model.h` inside the same folder as your arduino sketch.
+5. Copy the entire contents of model.cc into model.h
+6. Create header guards that define the file as `MODEL_TFLITE_H`
 
 ## Deployment
 
 For Deployment are running a script similar to the datacollection script. The input in discrete chunks
 using a button trigger, interpolated linearly, and then inferenced.
 
-#### Steps
+### Steps
 1. Use the exact same circuit at the one used within the data collection phase.
 2. Add five LED's wired to light if any of the pins 3, 4, 5, 6 and 7 output `HIGH` signals
 3. Open the 'arduino-imp.ino' script located at deployment\arduino-imp\arduino-imp.ino
