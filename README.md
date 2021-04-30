@@ -2,13 +2,9 @@
 
 Complete pipeline to create an application that can recognize custom gestures made on an Arduino Nano BLE Sense.
 
-<<<<<<< HEAD
 The gestures are detected with deep learning using accelerometer data. 
 
 The pipeline includes data collection on an Arduino, data processing, neural network training, model conversion, model deployment on Arduino. Additionally, there is a section on how to send the predicted gestures to a server via bluetooth.
-=======
-The pipeline includes data collection on an Arduino, data processing, neural network training, model conversion, model deployment on Arduino, and sending the gesure prediction to a server.
->>>>>>> 673829674a9404fb3d2570568348a80a66dd0406
 
 ## Collect Data
 
