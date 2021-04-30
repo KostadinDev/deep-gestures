@@ -9,9 +9,11 @@ if __name__ == '__main__':
     # load in formatted data
     data_O = np.load('output/data_O_formatted.npy', allow_pickle=True)
     data_LR = np.load('output/data_LR_formatted.npy', allow_pickle=True)
-
+    data_RL = np.load('output/data_RL_formatted.npy', allow_pickle=True)
+    data_spin = np.load('output/data_spin_formatted.npy', allow_pickle=True)
+    data_throw = np.load('output/data_throw_formatted.npy', allow_pickle=True)
     # join and shuffle formatted data
-    data = np.vstack((data_O, data_LR))
+    data = np.vstack((data_O, data_LR,data_RL,data_spin,data_throw))
     np.random.shuffle(data)
     X = data[:, 0]
     y = data[:, 1].astype(np.float)
@@ -33,13 +35,13 @@ if __name__ == '__main__':
                                layers.MaxPool2D((3, 1), padding='same'),
                                layers.Flatten(),
                                layers.Dense(16, activation='relu'),
-                               layers.Dense(1, activation='sigmoid')])
+                               layers.Dense(5, activation='softmax')])
 
-    model.compile(optimizer='adam', loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
+    model.compile(optimizer='adam', loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
                   metrics=['accuracy'])
 
     history = model.fit(X_train, y_train, epochs=50, validation_data=(X_val, y_val))
-
+    print(model.summary())
     # plt.plot(history.history['accuracy'], label='accuracy')
     # plt.plot(history.history['val_accuracy'], label='val_accuracy')
     # plt.xlabel('Epoch')

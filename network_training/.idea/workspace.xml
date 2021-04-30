@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b6ad8804-c3b7-48ff-b2e9-6dfd0faf027c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/format_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/format_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model.tflite" beforeDir="false" afterPath="$PROJECT_DIR$/model.tflite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JupyterTrust" id="d66f9c7a-5019-4254-9b39-ecc7634f1651" />
+  <component name="ProjectId" id="1pdmnDNCnyTD16wHxjmS3i6dRs8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kosta\Desktop\magic_wand\gesture-recognition\input" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.train">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="gesture-recognition" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="gesture-recognition" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="gesture-recognition" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.train" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b6ad8804-c3b7-48ff-b2e9-6dfd0faf027c" name="Default Changelist" comment="" />
+      <created>1615521505980</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615521505980</updated>
+      <workItem from="1615521507006" duration="1952000" />
+      <workItem from="1615523876822" duration="418000" />
+      <workItem from="1615524310534" duration="131000" />
+      <workItem from="1615524465711" duration="18000" />
+      <workItem from="1615524485146" duration="2203000" />
+      <workItem from="1615527220124" duration="11348000" />
+      <workItem from="1615687082973" duration="1564000" />
+      <workItem from="1615772900179" duration="54000" />
+      <workItem from="1616089061270" duration="6009000" />
+      <workItem from="1617914415908" duration="4721000" />
+      <workItem from="1618036510441" duration="21000" />
+      <workItem from="1619804809872" duration="150000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="235" y="313" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617995155537">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="235" y="313" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1617995155537" />
+    <state x="2155" y="313" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1616089337178" />
+    <state x="667" y="434" key="FileChooserDialogImpl" timestamp="1618036529960">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="667" y="434" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1618036529960" />
+    <state width="1877" height="274" key="GridCell.Tab.0.bottom" timestamp="1615525515855">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="274" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615525515855" />
+    <state width="1877" height="275" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1615522362065" />
+    <state width="1877" height="274" key="GridCell.Tab.0.center" timestamp="1615525515855">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="274" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615525515855" />
+    <state width="1877" height="275" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1615522362065" />
+    <state width="1877" height="274" key="GridCell.Tab.0.left" timestamp="1615525515855">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="274" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615525515855" />
+    <state width="1877" height="275" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1615522362065" />
+    <state width="1877" height="274" key="GridCell.Tab.0.right" timestamp="1615525515855">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="274" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615525515855" />
+    <state width="1877" height="275" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1615522362065" />
+    <state x="427" y="301" key="SettingsEditor" timestamp="1615687278621">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="427" y="301" key="SettingsEditor/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615687278621" />
+    <state x="142" y="191" width="583" height="849" key="find.popup" timestamp="1615579562081">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="142" y="191" width="583" height="849" key="find.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615579562081" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1615524553174">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615524553174" />
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1615522163569" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/gesture_recognition$main.coverage" NAME="main Coverage Results" MODIFIED="1615525491046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>

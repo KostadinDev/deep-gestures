@@ -44,7 +44,6 @@ def format_data(file_path, label):
             if row[0] == 'EXIT':
                 try:
                     entry = interpolate(np.array(entry))
-                    break;
                     data.append(np.array([entry, label]))
                 except:
                     print('')
@@ -53,7 +52,6 @@ def format_data(file_path, label):
                 entry = []
             else:
                 entry.append([float(i) for i in row[:4]])
-    print(f'Number of entries: {size}')
     return data
 
 
