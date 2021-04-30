@@ -15,13 +15,37 @@ Serial Port that the Arduino Nano is set to, and the 'Speed' to your Arduino Nan
 4.  Collect Data and save it within a csv file.
 
 ## Process Data
+The data processing script <b>network_training/format_data.py</b> converts the output of the Arduino sensors into numpy arrays that are later used to train the machine learning model.
 
-* Put the collected data csv files in network_training/collected_data
-* cd network_training/ 
-* For each different gesture run the command below specifying the label of the gesture. The label should be numeric.
-* _python format_data.py <input_location> <output_location> <label>_
-	>python format_data.py collected_data/collected_LRdash processed_data/processed_LRdash 0
+###Steps:
+1. Put the collected data csv files in network_training/collected_data
+2. Open the network training folder
+	>cd network_training/
+3. For each different gesture run the command below specifying th collected data, where to save the processed output, and  the label of the gesture. Keep in mind the label should be numeric. There are example files in network_training/collected_data and network_training/processed_data.
+	>python format_data.py <collected_data_csv> <saving_location> \<label>
+	Example:
+	>python format_data.py collected_data/collected_LRdash.csv processed_data/processed_LRdash.npy 0
+
+
 ## Train Model
+By this point you should have a folder with processed data with .npy files. Now we will train a model with this data. The model is trained with a convolutional neural network (CNN) in Tensorflow. The data is split into training (60%) , validation (20%), and testing (20%). 
+ 
+###Steps:
+1. Open the network training folder
+	>cd network_training/
+2. Run the training script
+    >python train.py <processed_data_folder> <model_saving_location_folder> \<label>
+    Example:
+	>python train.py processed_data/ lite_models/
+
+## Model Conversion
+After obtaining the Tensforflow Lite model as .tflite file you have to convert it to a c++ file and put it in your Arduino project.
+
+###Steps:
+1. Place the folder with tensorflow lite models in Google Drive
+2. Open the convert_model.ipynb jupyter notebook in Google Colab
+3. Run the code blocks in the Colab notebook and a model.cc file will be generated
+4. Place the model.cc file in your Arduino project
 
 ## Deployment
 
