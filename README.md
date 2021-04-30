@@ -17,7 +17,7 @@ Serial Port that the Arduino Nano is set to, and the 'Speed' to your Arduino Nan
 ## Process Data
 The data processing script <b>network_training/format_data.py</b> converts the output of the Arduino sensors into numpy arrays that are later used to train the machine learning model.
 
-###Steps:
+### Steps:
 1. Put the collected data csv files in network_training/collected_data
 2. Open the network training folder
 	>cd network_training/
@@ -30,7 +30,7 @@ The data processing script <b>network_training/format_data.py</b> converts the o
 ## Train Model
 By this point you should have a folder with processed data with .npy files. Now we will train a model with this data. The model is trained with a convolutional neural network (CNN) in Tensorflow. The data is split into training (60%) , validation (20%), and testing (20%). 
  
-###Steps:
+### Steps:
 1. Open the network training folder
 	>cd network_training/
 2. Run the training script
@@ -41,7 +41,7 @@ By this point you should have a folder with processed data with .npy files. Now 
 ## Model Conversion
 After obtaining the Tensforflow Lite model as .tflite file you have to convert it to a c++ file and put it in your Arduino project.
 
-###Steps:
+### Steps:
 1. Place the folder with tensorflow lite models in Google Drive
 2. Open the convert_model.ipynb jupyter notebook in Google Colab
 3. Run the code blocks in the Colab notebook and a model.cc file will be generated
