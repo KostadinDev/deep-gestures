@@ -2,6 +2,7 @@
  * Librariees and outside files
  */
 #include <Arduino_LSM9DS1.h>
+#include <ArduinoBLE.h>
 
 #include "primer.h"
 #include <TensorFlowLite.h>
@@ -66,7 +67,9 @@ int delayTime = 10;
 
 int i;
 
-
+// creating BLE com lines
+BLEService gestureService("19B10011-E8F2-537E-4F6C-D104768A1214");
+BLEUnsignedIntCharacteristic gestureCharacteristic("19B10011-E8F2-537E-4F6C-D104768A1214", BLERead | BLEWrite);
 
 /*****************************************
  * SETUP
@@ -130,10 +133,20 @@ void setup() {
   pinMode(SPIN_PIN, OUTPUT);
   pinMode(THROW_PIN, OUTPUT);
 
+  //initialize BLE comms();
+  BLE.begin();
+  BLE.setLocalName("GesturePredictor");
+  BLE.setAdvertisedService(gestureService);
+  gestureService.addCharacteristic(gestureCharacteristic);
+  BLE.addService(gestureService);
+
+  gestureCharacteristic.writeValue(0);
+  BLE.advertise();
+
 }
 
 void loop() {
- 
+  BLE.poll();
   if(digitalRead(SWITCH_PIN) == HIGH && IMU.accelerationAvailable()){
     Serial.println("in switch loop");
     t = millis();
@@ -214,28 +227,35 @@ void loop() {
     Serial.print("    Prediction 5: ");
     Serial.println(gesture_pred[4]);
 
+    //writeBLE(gesture_pred);
+    
     Serial.println("1");
     if(gesture_pred[0] > .5){
       analogWrite(O_PIN,gesture_pred[0]*255);
+      gestureCharacteristic.writeValue(1);
       //digitalWrite(O_PIN, HIGH);
     }
     Serial.println("2");
     if(gesture_pred[1] > .5){
       analogWrite(LR_PIN,gesture_pred[1]*255);
+      gestureCharacteristic.writeValue(2);
       //digitalWrite(LR_PIN, HIGH);
     }
     Serial.println("3");
     if(gesture_pred[2] > .5){
       analogWrite(RL_PIN,gesture_pred[2]*255);
+      gestureCharacteristic.writeValue(3);
       //digitalWrite(RL_PIN, HIGH);
     }
     Serial.println("4");
     if(gesture_pred[3] > .5){
       analogWrite(SPIN_PIN,gesture_pred[3]*255);
+      gestureCharacteristic.writeValue(4);
       //digitalWrite(SPIN_PIN, HIGH);
     }
     Serial.println("5");
     if(gesture_pred[4] > .5){
+      gestureCharacteristic.writeValue(5);
       digitalWrite(THROW_PIN, HIGH);
     }
     Serial.println("6");
