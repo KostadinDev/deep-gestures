@@ -3,9 +3,10 @@ import pandas as pd
 import numpy as np
 import csv
 from scipy.interpolate import interp1d
-from mpl_toolkits import mplot3d
+# from mpl_toolkits import mplot3d
 import sys
 import matplotlib.pyplot as plt
+from data_augmentation import data_augment
 
 date = True
 
@@ -26,22 +27,29 @@ def interpolate(entry):
     return interpolated_entry
 
 
-def format_data(file_path, label):
+def format_data(file_path, label, data_format):
     data = []
-    size = 0
+    # size = 0
     with open(file_path) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         entry = []
         for row in csv_reader:
+<<<<<<< HEAD
             if date:
+=======
+            if data_format == 'Category':
+>>>>>>> 05fc5a84302b107f73a08ceebc91642121e0c67c
                 row[0] = row[0][16:]
             if row[0] == 'EXIT':
                 try:
                     entry = interpolate(np.array(entry))
                     data.append(np.array([entry, label]))
+                    # Apply data augmentation from the current entry
+                    for _ in range(1000):
+                        data.append(np.array([data_augment(entry), label]))
                 except:
-                    print('')
-                size += 1
+                    pass
+                # size += 1
             elif row[0] == 'BEGIN':
                 entry = []
             else:
@@ -54,7 +62,12 @@ if __name__ == '__main__':
     input_path = sys.argv[1]
     output_path = sys.argv[2]
     label = sys.argv[3]
-    data = format_data(input_path, label)
+    data_format = ''
+    try:
+        data_format = sys.argv[4]
+    except:
+        data_format = 'Category'
+    data = format_data(input_path, label, data_format)
     np.save(output_path, data, allow_pickle=True)
     print(data)
 
