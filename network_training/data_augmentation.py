@@ -20,10 +20,6 @@ def interpolate(entry):
 # Takes an entry for data and randomizes the points within a small range
 def randomize_features_within_range(entry):
     time = entry[:, 0]
-    # percentages_arr = [(1/15), (1/20), (1/12), (1/10), (1/17), (1/11), (1/13), (1/16)]
-    # x_perc = random.choice(percentages_arr)
-    # y_perc = random.choice(percentages_arr)
-    # z_perc = random.choice(percentages_arr)
     x, y, z = entry[:, 1], entry[:, 2], entry[:, 3]
     for i in range(len(x)):
         x[i] += random.uniform(-(1/15)*x[i], (1/15)*x[i])
@@ -37,10 +33,10 @@ def randomize_features_within_range(entry):
 
 # Augment the given data entry to produce new data points from existing data
 def data_augment(entry):
-    entry_list = entry.tolist()
-    percent_arr = [(4//5), (5//6), (3//4), (6//7)]
-    index_arr = random.sample(range(len(entry_list)), random.choice(percent_arr)*len(entry_list))
-    new_entry_list = entry_list[index_arr]
-    adjusted_entry_list = randomize_features_within_range(new_entry_list)
-    return interpolate(np.array(adjusted_entry_list))
+    percent_arr = [0.8, 0.833, 0.75, 0.857]
+    index_arr = random.sample(range(len(entry)), int(random.choice(percent_arr)*len(entry)))
+    index_arr.sort()
+    new_entry_list = [entry[elem] for elem in index_arr]
+    adjusted_entry_list = randomize_features_within_range(np.array(new_entry_list))
+    return interpolate(adjusted_entry_list)
 

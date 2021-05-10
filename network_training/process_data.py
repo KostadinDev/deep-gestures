@@ -28,7 +28,7 @@ def interpolate(entry):
     return interpolated_entry
 
 
-def format_data(file_path, label, data_format):
+def format_data(file_path, label, data_format, data_augment_flag):
     data = []
     # size = 0
     with open(file_path) as csv_file:
@@ -39,11 +39,14 @@ def format_data(file_path, label, data_format):
                 row[0] = row[0][16:]
             if row[0] == 'EXIT':
                 try:
+                    raw_entry = entry.copy()
                     entry = interpolate(np.array(entry))
                     data.append(np.array([entry, label]))
                     # Apply data augmentation from the current entry
-                    for _ in range(1000):
-                        data.append(np.array([data_augment(entry), label]))
+                    if data_augment_flag:
+                        for _ in range(10):
+                            augment_entry = data_augment(raw_entry)
+                            data.append(np.array([augment_entry, label]))
                 except:
                     pass
                 # size += 1
@@ -59,12 +62,17 @@ if __name__ == '__main__':
     input_path = sys.argv[1]
     output_path = sys.argv[2]
     label = sys.argv[3]
-    data_format = ''
+    data_format = 'Category'
     try:
         data_format = sys.argv[4]
     except:
-        data_format = 'Category'
-    data = format_data(input_path, label, data_format)
+        pass
+    data_augment_flag = True
+    try:
+        data_augment_flag = False if sys.argv[5] == "False" else True
+    except:
+        pass
+    data = format_data(input_path, label, data_format, data_augment_flag)
     np.save(output_path, data, allow_pickle=True)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
