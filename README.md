@@ -73,6 +73,17 @@ using a button trigger, interpolated linearly, and then inferenced.
     - 'model.h' - header file that contains the TensorFlowLite model
 5. Upload the code and test.
 
-## Connect to a Server
+## Connect to a computer via bluetooth
 
-TBD
+We took advantage of the Bluetooth Low-Energy capabilities of the Arduino Nano 33 BLE in conjunction with the Bleak python library
+in order to allow for the Arduino communicate with the outside world.  Our hopes are that the system can be used as a gesture controller 
+that can be used to trigger other processes.
+
+### Steps
+1. Download python.
+2. Use pip install to download the Bleak and Asyncio libraries (python version must be < 3.6)
+3. Plug in the Arduino Nano 33 BLE with the Deployment code running
+4. Navigate to the bleak [documentation page](https://bleak.readthedocs.io/en/latest/scanning.html) and run the code used to discover other devices
+5. Copy the address of the Arduino Nano. It should either be `GesturePredictor` or `Arduino`
+6. load the python file `bluetooth\ble-testing` paste in the address detected and check that the Model number matches the model number within the arduino code
+7. Run the ble code via command line and test
