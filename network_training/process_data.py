@@ -34,11 +34,7 @@ def format_data(file_path, label, data_format):
         csv_reader = csv.reader(csv_file, delimiter=',')
         entry = []
         for row in csv_reader:
-<<<<<<< HEAD
-            if date:
-=======
             if data_format == 'Category':
->>>>>>> 05fc5a84302b107f73a08ceebc91642121e0c67c
                 row[0] = row[0][16:]
             if row[0] == 'EXIT':
                 try:
