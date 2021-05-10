@@ -81,7 +81,7 @@ if __name__ == '__main__':
                                layers.Flatten(),
                                layers.Dense(16, activation='relu'),
                                layers.BatchNormalization(),
-                               layers.Dense(3, activation='softmax')])
+                               layers.Dense(5, activation='softmax')])
 
     # Set up hyper parameters
     optimizer = keras.optimizers.Adam(learning_rate=0.001)
