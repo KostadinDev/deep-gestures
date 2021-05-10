@@ -4,6 +4,9 @@
     <list default="true" id="b6ad8804-c3b7-48ff-b2e9-6dfd0faf027c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../bluetooth/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../bluetooth/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_data/data_LRdash_formatted.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_data/data_spin_throw.npy" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -154,7 +157,7 @@
       <workItem from="1619804809872" duration="150000" />
       <workItem from="1619805911222" duration="5815000" />
       <workItem from="1619818101256" duration="74000" />
-      <workItem from="1620508325966" duration="10984000" />
+      <workItem from="1620508325966" duration="14185000" />
     </task>
     <servers />
   </component>

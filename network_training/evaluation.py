@@ -10,7 +10,7 @@ import sys
 
 if __name__ == '__main__':
 
-    data_folder, model_output = sys.argv[1:3]
+    data_folder, model_input = sys.argv[1:3]
 
     data = []
     # Load data from folder
@@ -29,45 +29,14 @@ if __name__ == '__main__':
     # Get X data and format into training format
     X = data[:, 0]
     X = np.vstack(X).astype('float32')
-    # print("Standard deviation")
-    # np.std(X)
-    # print("MEAN: ")
-    # np.mean(X)
-    # # Normalize the data
-    # print("Before:")
-    # print(X)
-    # keras.utils.normalize(
-    #     X, axis=-1, order=2
-    # )
-    # print("After")
-    # print(X)
-
     X = np.reshape(X, (int(len(X) / 128), 128, 3, -1))
 
     # Get y data
     y = data[:, 1].astype(np.float)
 
+    model = tf.keras.models.load_model(model_input)
 
-    def recall_m(y_true, y_pred):
-        true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-        possible_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
-        recall = true_positives / (possible_positives + K.epsilon())
-        return recall
+    y_pred = model.predict(X)
 
+    #evaluate
 
-    def precision_m(y_true, y_pred):
-        true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-        predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
-        precision = true_positives / (predicted_positives + K.epsilon())
-        return precision
-
-
-    def f1_m(y_true, y_pred):
-        precision = precision_m(y_true, y_pred)
-        recall = recall_m(y_true, y_pred)
-        return 2 * ((precision * recall) / (precision + recall + K.epsilon()))
-
-
-
-    model = tf.keras.models.load_model('lite_models/model_keras.h5')
-    test_loss, test_acc = model.evaluate(X, y, verbose=2)
