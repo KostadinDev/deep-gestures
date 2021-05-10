@@ -50,8 +50,8 @@ if __name__ == '__main__':
     y = data[:, 1].astype(np.float)
     
     # Split into 60% for training, 20% for validation, 20% testing
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
-    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.25, random_state=1)
+    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=1)
+    # X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.25, random_state=1)
 
     def recall_m(y_true, y_pred):
         true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
@@ -120,13 +120,13 @@ if __name__ == '__main__':
     # Start training
     history = model.fit(X_train, y_train, epochs=20, validation_data=(X_val, y_val))
     # Evaluate
-    test_loss, test_acc, test_f1, test_prec, test_recall = model.evaluate(X_test, y_test, verbose=2)
+    test_loss, test_acc, test_f1, test_prec, test_recall = model.evaluate(X_val, y_val, verbose=2)
     
     training_loss = history.history['loss']
     test_loss = history.history['val_loss']
     
-    training_accuracy = history.history['accuracy']
-    test_accuracy = history.history['val_accuracy']
+    training_f1m = history.history['f1_m']
+    test_f1m = history.history['val_f1_m']
 
     # Create count of the number of epochs
     epoch_count = range(1, len(training_loss) + 1)
@@ -134,17 +134,17 @@ if __name__ == '__main__':
     # Visualize loss history
     plt.plot(epoch_count, training_loss, 'r--')
     plt.plot(epoch_count, test_loss, 'b-')
-    plt.legend(['Training Loss', 'Test Loss'])
+    plt.legend(['Validation Loss', 'Validation Loss'])
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
     plt.show()
 
-    epoch_count = range(1, len(training_accuracy) + 1)
-    plt.plot(epoch_count, training_accuracy, 'r--')
-    plt.plot(epoch_count, test_accuracy, 'b-')
-    plt.legend(['Training Accuracy', 'Test Accuracy'])
+    epoch_count = range(1, len(training_f1m) + 1)
+    plt.plot(epoch_count, training_f1m, 'r--')
+    plt.plot(epoch_count, test_f1m, 'b-')
+    plt.legend(['Training F1', 'Test F1'])
     plt.xlabel('Epoch')
-    plt.ylabel('Accuracy')
+    plt.ylabel('F1')
     plt.show()
 
     # Convert model to Tensorflow Lite
@@ -155,5 +155,5 @@ if __name__ == '__main__':
     if not os.path.exists(model_output):
         os.makedirs(model_output)
 
-    with open(model_output + "/" + 'model_fine_tune_data.tflite', 'wb') as f:
+    with open(model_output + "/" + 'model_testing_data.tflite', 'wb') as f:
         f.write(tflite_model)

@@ -1,7 +1,4 @@
-# This is a sample Python script.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import pandas as pd
 import numpy as np
 import csv
@@ -10,6 +7,8 @@ from scipy.interpolate import interp1d
 import sys
 import matplotlib.pyplot as plt
 from data_augmentation import data_augment
+
+date = True
 
 
 # Takes in a gesture entry and interpolates 128 data points
@@ -74,5 +73,6 @@ if __name__ == '__main__':
         pass
     data = format_data(input_path, label, data_format, data_augment_flag)
     np.save(output_path, data, allow_pickle=True)
+    print(data)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
