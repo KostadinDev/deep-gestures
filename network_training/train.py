@@ -121,13 +121,13 @@ if __name__ == '__main__':
     plt.ylabel('Loss')
     plt.show()
 
-    epoch_count = range(1, len(training_accuracy) + 1)
-    plt.plot(epoch_count, training_accuracy, 'r--')
-    plt.plot(epoch_count, test_accuracy, 'b-')
-    plt.legend(['Training Accuracy', 'Test Accuracy'])
-    plt.xlabel('Epoch')
-    plt.ylabel('Accuracy')
-    plt.show()
+    # epoch_count = range(1, len(training_accuracy) + 1)
+    # plt.plot(epoch_count, training_accuracy, 'r--')
+    # plt.plot(epoch_count, test_accuracy, 'b-')
+    # plt.legend(['Training Accuracy', 'Test Accuracy'])
+    # plt.xlabel('Epoch')
+    # plt.ylabel('Accuracy')
+    # plt.show()
 
     # Convert model to Tensorflow Lite
     converter = tf.lite.TFLiteConverter.from_keras_model(model)
