@@ -30,7 +30,7 @@ namespace { // for scope
   TfLiteTensor* input = nullptr;
   TfLiteTensor* output = nullptr;
 
-  constexpr int tensor_arena_size = 15*1024;
+  constexpr int tensor_arena_size = 40*1024;
   uint8_t tensor_arena[tensor_arena_size];
 
 }
