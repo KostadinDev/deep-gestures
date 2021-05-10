@@ -35,6 +35,7 @@ def format_data(file_path, label, data_format):
         entry = []
         for row in csv_reader:
             if data_format == 'Category':
+                #Remove the unneccessary beginning characters
                 row[0] = row[0][16:]
             if row[0] == 'EXIT':
                 try:
