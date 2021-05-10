@@ -47,10 +47,6 @@ if __name__ == '__main__':
     # Get y data
     y = data[:, 1].astype(np.float)
 
-    # Split into 60% for training, 20% for validation, 20% testing
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
-    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.25, random_state=1)
-
 
     def recall_m(y_true, y_pred):
         true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
@@ -74,4 +70,4 @@ if __name__ == '__main__':
 
 
     model = tf.keras.models.load_model('lite_models/model_keras.h5')
-    model.summary()
+    test_loss, test_acc = model.evaluate(X, y, verbose=2)

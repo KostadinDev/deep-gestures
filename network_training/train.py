@@ -89,12 +89,12 @@ if __name__ == '__main__':
                 #   metrics=['accuracy', f1_m, precision_m, recall_m])
 
     # Start training
-    history = model.fit(X_train, y_train, epochs=170, validation_data=(X_val, y_val))
+    history = model.fit(X_train, y_train, epochs=20, validation_data=(X_val, y_val))
     # Evaluate
     # test_loss, test_acc, test_f1, test_prec, test_recall = model.evaluate(X_test, y_test, verbose=2)
     test_loss, test_acc = model.evaluate(X_test, y_test, verbose=2)
     training_loss = history.history['loss']
-    test_loss = history.history['val_loss']
+    val_loss = history.history['val_loss']
     
     training_accuracy = history.history['accuracy']
     test_accuracy = history.history['val_accuracy']

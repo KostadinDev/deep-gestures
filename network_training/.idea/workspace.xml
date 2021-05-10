@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ad8804-c3b7-48ff-b2e9-6dfd0faf027c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/evaluation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../bluetooth/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../bluetooth/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fine_tune_processed_data/processed_Category_LR.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fine_tune_processed_data/processed_Category_O.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fine_tune_processed_data/processed_Category_RL.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lite_models/model_keras.h5" beforeDir="false" afterPath="$PROJECT_DIR$/lite_models/model_keras.h5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +155,7 @@
       <workItem from="1619804809872" duration="150000" />
       <workItem from="1619805911222" duration="5815000" />
       <workItem from="1619818101256" duration="74000" />
-      <workItem from="1620508325966" duration="8419000" />
+      <workItem from="1620508325966" duration="10008000" />
     </task>
     <servers />
   </component>
