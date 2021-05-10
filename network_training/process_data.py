@@ -34,6 +34,7 @@ def format_data(file_path, label):
         csv_reader = csv.reader(csv_file, delimiter=',')
         entry = []
         for row in csv_reader:
+            row[0] = row[0][16:]
             if row[0] == 'EXIT':
                 try:
                     entry = interpolate(np.array(entry))
