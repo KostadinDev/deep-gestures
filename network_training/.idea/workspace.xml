@@ -2,19 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ad8804-c3b7-48ff-b2e9-6dfd0faf027c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../bluetooth/address_finder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../bluetooth/ble_testing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bluetooth/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bluetooth/.idea/bluetooth.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bluetooth/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bluetooth/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bluetooth/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bluetooth/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bluetooth/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bluetooth/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../deployment/arduino-imp/arduino-imp.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../deployment/arduino-imp/arduino-imp.ino" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bluetooth/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../bluetooth/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fine_tune_processed_data/processed_Category_LR.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fine_tune_processed_data/processed_Category_O.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fine_tune_processed_data/processed_Category_RL.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lite_models/model_keras.h5" beforeDir="false" afterPath="$PROJECT_DIR$/lite_models/model_keras.h5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_data.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +44,7 @@
       <recent name="C:\Users\kosta\Desktop\magic_wand\gesture-recognition\input" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.train">
+  <component name="RunManager" selected="Python.evaluation">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="gesture-recognition" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -64,6 +59,25 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="evaluation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="gesture-recognition" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/evaluation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -118,6 +132,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.evaluation" />
         <item itemvalue="Python.train" />
       </list>
     </recent_temporary>
@@ -144,7 +159,7 @@
       <workItem from="1619804809872" duration="150000" />
       <workItem from="1619805911222" duration="5815000" />
       <workItem from="1619818101256" duration="74000" />
-      <workItem from="1620508325966" duration="3034000" />
+      <workItem from="1620508325966" duration="8419000" />
     </task>
     <servers />
   </component>
@@ -202,10 +217,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="142" y="191" width="583" height="849" key="find.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615579562081" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1615524553174">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1620670872715">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615524553174" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1620670872715" />
     <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1615522163569" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">

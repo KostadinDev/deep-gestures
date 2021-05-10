@@ -1,7 +1,4 @@
-# This is a sample Python script.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import pandas as pd
 import numpy as np
 import csv
@@ -9,6 +6,8 @@ from scipy.interpolate import interp1d
 from mpl_toolkits import mplot3d
 import sys
 import matplotlib.pyplot as plt
+
+date = True
 
 
 # Takes in a gesture entry and interpolates 128 data points
@@ -34,7 +33,8 @@ def format_data(file_path, label):
         csv_reader = csv.reader(csv_file, delimiter=',')
         entry = []
         for row in csv_reader:
-            row[0] = row[0][16:]
+            if date:
+                row[0] = row[0][16:]
             if row[0] == 'EXIT':
                 try:
                     entry = interpolate(np.array(entry))
@@ -56,5 +56,6 @@ if __name__ == '__main__':
     label = sys.argv[3]
     data = format_data(input_path, label)
     np.save(output_path, data, allow_pickle=True)
+    print(data)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+

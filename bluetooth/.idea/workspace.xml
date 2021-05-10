@@ -2,19 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd7ddd06-ac1d-4899-9fec-da659f60192d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/address_finder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ble_testing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/bluetooth.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../deployment/arduino-imp/arduino-imp.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../deployment/arduino-imp/arduino-imp.ino" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../network_training/evaluation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../network_training/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../network_training/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network_training/fine_tune_processed_data/processed_Category_LR.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network_training/fine_tune_processed_data/processed_Category_O.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network_training/fine_tune_processed_data/processed_Category_RL.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network_training/lite_models/model_keras.h5" beforeDir="false" afterPath="$PROJECT_DIR$/../network_training/lite_models/model_keras.h5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network_training/process_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/../network_training/process_data.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +126,7 @@
       <workItem from="1619960811626" duration="3208000" />
       <workItem from="1619990882462" duration="7000" />
       <workItem from="1620139053739" duration="15000" />
-      <workItem from="1620614210431" duration="1816000" />
+      <workItem from="1620614210431" duration="4932000" />
     </task>
     <servers />
   </component>
@@ -143,22 +138,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="861" y="386" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1620139066836" />
-    <state width="1877" height="275" key="GridCell.Tab.0.bottom" timestamp="1620614758327">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="275" key="GridCell.Tab.0.bottom" timestamp="1620625711792">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="275" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1620614758327" />
-    <state width="1877" height="275" key="GridCell.Tab.0.center" timestamp="1620614758327">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="275" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1620625711792" />
+    <state width="1877" height="275" key="GridCell.Tab.0.center" timestamp="1620625711792">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="275" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1620614758327" />
-    <state width="1877" height="275" key="GridCell.Tab.0.left" timestamp="1620614758327">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="275" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1620625711792" />
+    <state width="1877" height="275" key="GridCell.Tab.0.left" timestamp="1620625711792">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="275" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1620614758327" />
-    <state width="1877" height="275" key="GridCell.Tab.0.right" timestamp="1620614758327">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="275" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1620625711792" />
+    <state width="1877" height="275" key="GridCell.Tab.0.right" timestamp="1620625711792">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="275" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1620614758327" />
+    <state width="1877" height="275" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1620625711792" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/bluetooth$ble_testing.coverage" NAME="ble_testing Coverage Results" MODIFIED="1620614552533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
