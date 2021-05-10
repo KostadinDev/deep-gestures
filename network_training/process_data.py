@@ -23,6 +23,7 @@ def interpolate(entry):
     interpolated_x = fx(new_time)
     interpolated_y = fy(new_time)
     interpolated_z = fz(new_time)
+
     interpolated_entry = np.array([interpolated_x, interpolated_y, interpolated_z]).T
     return interpolated_entry
 
@@ -34,6 +35,7 @@ def format_data(file_path, label, data_format, data_augment_flag):
         csv_reader = csv.reader(csv_file, delimiter=',')
         entry = []
         for row in csv_reader:
+            count += 1
             if data_format == 'Category':
                 #Remove the unneccessary beginning characters
                 row[0] = row[0][16:]
@@ -41,6 +43,7 @@ def format_data(file_path, label, data_format, data_augment_flag):
                 try:
                     raw_entry = entry.copy()
                     entry = interpolate(np.array(entry))
+                
                     data.append(np.array([entry, label]))
                     # Apply data augmentation from the current entry
                     if data_augment_flag:
@@ -74,6 +77,3 @@ if __name__ == '__main__':
         pass
     data = format_data(input_path, label, data_format, data_augment_flag)
     np.save(output_path, data, allow_pickle=True)
-    print(data)
-
-

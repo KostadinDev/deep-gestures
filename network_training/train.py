@@ -88,7 +88,7 @@ if __name__ == '__main__':
 
     y_pred = np.argmax(model.predict(X_test), axis=1)
 
-    print(classification_report(y_test, y_pred, target_names=['0','1','2','3','4']))
+    # print(classification_report(y_test, y_pred, target_names=['0','1','2']))
     # F1 Score
     # f1_score = f1_score(y_test, y_pred, average='macro')
     # print(f1_score)
@@ -121,7 +121,7 @@ if __name__ == '__main__':
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
     plt.show()
-
+    
     # epoch_count = range(1, len(training_accuracy) + 1)
     # plt.plot(epoch_count, training_accuracy, 'r--')
     # plt.plot(epoch_count, test_accuracy, 'b-')
