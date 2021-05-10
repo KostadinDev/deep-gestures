@@ -75,7 +75,7 @@ if __name__ == '__main__':
 
     # Set up hyper parameters
     optimizer = keras.optimizers.Adam(learning_rate=0.001)
-    model.compile(optimizer=optimizer, loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), metrics=['accuracy'])
+    model.compile(optimizer=optimizer, loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), metrics=[f1_m])
     
     # Add the line below if you are interested in all metrics
     #   metrics=['accuracy', f1_m, precision_m, recall_m])
