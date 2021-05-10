@@ -27,8 +27,6 @@ if __name__ == '__main__':
     data = np.vstack(data)
     np.random.shuffle(data)
 
-    # print(data[0])
-    # print(5/0)
     # Get X data and format into training format
     X = data[:, 0]
     X = np.vstack(X).astype('float32')
@@ -40,7 +38,5 @@ if __name__ == '__main__':
     model = tf.keras.models.load_model(model_input)
     y_pred = np.argmax(model.predict(X), axis=1)
 
+    # Prints a Metric Report of the model
     print(classification_report(y, y_pred, target_names=['0','1','2']))
-
-    #evaluate
-
