@@ -5,6 +5,7 @@ import tensorflow as tf
 from tensorflow.keras import layers, models, backend as K
 from tensorflow import keras
 import matplotlib.pyplot as plt
+from sklearn.metrics import f1_score, precision_score, recall_score, classification_report
 import os
 import sys
 
@@ -26,6 +27,8 @@ if __name__ == '__main__':
     data = np.vstack(data)
     np.random.shuffle(data)
 
+    # print(data[0])
+    # print(5/0)
     # Get X data and format into training format
     X = data[:, 0]
     X = np.vstack(X).astype('float32')
@@ -35,8 +38,9 @@ if __name__ == '__main__':
     y = data[:, 1].astype(np.float)
 
     model = tf.keras.models.load_model(model_input)
+    y_pred = np.argmax(model.predict(X), axis=1)
 
-    y_pred = model.predict(X)
+    print(classification_report(y, y_pred, target_names=['0','1','2']))
 
     #evaluate
 

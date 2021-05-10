@@ -2,6 +2,7 @@ import numpy as np
 from scipy.interpolate import interp1d
 import random
 
+
 # Takes in a gesture entry and interpolates 128 data points
 def interpolate(entry):
     time = entry[:, 0]
