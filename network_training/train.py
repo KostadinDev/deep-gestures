@@ -7,7 +7,7 @@ from tensorflow import keras
 import matplotlib.pyplot as plt
 import os
 import sys
-from sklearn.metrics import f1_score, precision_score, recall_score
+from sklearn.metrics import f1_score, precision_score, recall_score, classification_report
 
 
 
@@ -86,19 +86,20 @@ if __name__ == '__main__':
     history = model.fit(X_train, y_train, epochs=20, validation_data=(X_val, y_val))
     # Evaluate
 
-    y_pred = model.predict(X_test, y_test, verbose=2)
-    
+    y_pred = np.argmax(model.predict(X_test), axis=1)
+
+    print(classification_report(y_test, y_pred, target_names=['0','1','2','3','4']))
     # F1 Score
-    f1_score = f1_score(y_test, y_pred, average='macro')
-    print(f1_score)
+    # f1_score = f1_score(y_test, y_pred, average='macro')
+    # print(f1_score)
 
-    # Precision
-    precision = precision_score(y_test, y_pred, average='macro')
-    print(recall)
+    # # Precision
+    # precision = precision_score(y_test, y_pred, average='macro')
+    # print(recall)
 
-    #Recall
-    recall = recall_score(y_test, y_pred, average='macro')
-    print(recall)
+    # #Recall
+    # recall = recall_score(y_test, y_pred, average='macro')
+    # print(recall)
 
 
     training_loss = history.history['loss']
