@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ad8804-c3b7-48ff-b2e9-6dfd0faf027c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.ipynb_checkpoints/model-conversion-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bluetooth/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../bluetooth/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -133,6 +133,7 @@
       <workItem from="1619804809872" duration="150000" />
       <workItem from="1619805911222" duration="5815000" />
       <workItem from="1619818101256" duration="74000" />
+      <workItem from="1620508325966" duration="1806000" />
     </task>
     <servers />
   </component>
