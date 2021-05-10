@@ -81,15 +81,15 @@ if __name__ == '__main__':
                                layers.Flatten(),
                                layers.Dense(16, activation='relu'),
                                layers.BatchNormalization(),
-                               layers.Dense(3, activation='softmax')])
+                               layers.Dense(5, activation='softmax')])
 
     # Set up hyper parameters
-    optimizer = keras.optimizers.Adam(learning_rate=0.0001)
+    optimizer = keras.optimizers.Adam(learning_rate=0.001)
     model.compile(optimizer=optimizer, loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), metrics=['accuracy'])
                 #   metrics=['accuracy', f1_m, precision_m, recall_m])
 
     # Start training
-    history = model.fit(X_train, y_train, epochs=170, validation_data=(X_val, y_val))
+    history = model.fit(X_train, y_train, epochs=20, validation_data=(X_val, y_val))
     # Evaluate
     # test_loss, test_acc, test_f1, test_prec, test_recall = model.evaluate(X_test, y_test, verbose=2)
     test_loss, test_acc = model.evaluate(X_test, y_test, verbose=2)
