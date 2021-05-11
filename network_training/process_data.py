@@ -16,6 +16,17 @@ def interpolate(entry):
     time = entry[:, 0]
     x, y, z = entry[:, 1], entry[:, 2], entry[:, 3]
 
+    # Uncomment to plot Acceleration vs Time
+    
+    # plt.subplot(1, 2, 1)
+    # plt.scatter(time, x, label = "x", s=10)
+    # plt.scatter(time, y, label = "y", s=10)
+    # plt.scatter(time, z, label = "z", s=10)
+    # plt.title('Gesture: LR')
+    # plt.xlabel('Time (ms)')
+    # plt.ylabel('Acceleration m/s^2')
+    # plt.legend()
+
     fx = interp1d(time, x, kind='cubic')
     fy = interp1d(time, y, kind='cubic')
     fz = interp1d(time, z, kind='cubic')
@@ -23,6 +34,18 @@ def interpolate(entry):
     interpolated_x = fx(new_time)
     interpolated_y = fy(new_time)
     interpolated_z = fz(new_time)
+
+    # Uncomment to plot Acceleration vs Time (Interpolated data)
+
+    # plt.subplot(1, 2, 2)
+    # plt.scatter(new_time, interpolated_x, label = "x", s=10)
+    # plt.scatter(new_time, interpolated_y, label = "y", s=10)
+    # plt.scatter(new_time, interpolated_z, label = "z", s=10)
+    # plt.title('Interpolated Gesture: LR')
+    # plt.xlabel('Time (ms)')
+    # plt.ylabel('Acceleration m/s^2')
+    # plt.legend()
+    # plt.show()
 
     interpolated_entry = np.array([interpolated_x, interpolated_y, interpolated_z]).T
     return interpolated_entry
@@ -35,7 +58,6 @@ def format_data(file_path, label, data_format, data_augment_flag):
         csv_reader = csv.reader(csv_file, delimiter=',')
         entry = []
         for row in csv_reader:
-            count += 1
             if data_format == 'Category':
                 #Remove the unneccessary beginning characters
                 row[0] = row[0][16:]
