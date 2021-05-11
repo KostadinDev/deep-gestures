@@ -9,6 +9,7 @@ from data_augmentation import data_augment
 
 date = True
 
+# This file is intended to process the raw .csv file of accelerometer data
 
 # Takes in a gesture entry and interpolates 128 data points
 def interpolate(entry):
