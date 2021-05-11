@@ -3,19 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ad8804-c3b7-48ff-b2e9-6dfd0faf027c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_augmentation.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_augmentation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fine_tune_processed_data/augmented_Category_LR.npy" beforeDir="false" afterPath="$PROJECT_DIR$/fine_tune_augmented/augmented_Category_LR.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fine_tune_processed_data/augmented_Category_O.npy" beforeDir="false" afterPath="$PROJECT_DIR$/fine_tune_augmented/augmented_Category_O.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fine_tune_processed_data/augmented_Category_RL.npy" beforeDir="false" afterPath="$PROJECT_DIR$/fine_tune_augmented/augmented_Category_RL.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finetunemodel/model_fine_tuning.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lite_models/model_fine_tuning.h5" beforeDir="false" afterPath="$PROJECT_DIR$/lite_models/model_fine_tuning.h5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lite_models/model_keras.h5" beforeDir="false" afterPath="$PROJECT_DIR$/lite_models/model_keras.h5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/big_sample_augmented_model.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/random.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/randomtest.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exploratory_analysis.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fine_tune_model/model_fine_tuning.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.npy" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_fine_tune.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_fine_tune.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +72,9 @@
       <module name="gesture-recognition" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -168,7 +163,7 @@
       <workItem from="1619804809872" duration="150000" />
       <workItem from="1619805911222" duration="5815000" />
       <workItem from="1619818101256" duration="74000" />
-      <workItem from="1620508325966" duration="17629000" />
+      <workItem from="1620508325966" duration="20036000" />
     </task>
     <servers />
   </component>

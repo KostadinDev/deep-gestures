@@ -9,6 +9,8 @@ from sklearn.metrics import f1_score, precision_score, recall_score, classificat
 import os
 import sys
 
+
+# MEANT FOR DATA EVALUATION PURPOSES ONLY
 if __name__ == '__main__':
 
     data_folder, model_input = sys.argv[1:3]

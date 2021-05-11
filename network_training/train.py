@@ -68,7 +68,7 @@ if __name__ == '__main__':
     y_pred = np.argmax(model.predict(X_test), axis=1)
 
     # Prints the Classification Metrics Report
-    print(classification_report(y_test, y_pred, target_names=['0','1','2','3','4']))
+    #print(classification_report(y_test, y_pred, target_names=['0','1','2','3','4']))
 
 
     # 
@@ -98,7 +98,7 @@ if __name__ == '__main__':
     # plt.ylabel('Accuracy')
     # plt.show()
 
-    # Saving the kera model 
+    # Saving the keras model
     if str(file_type) == '0':
         # Save as a .h5 file
         model_output = model_output + "/" + "model.h5"
