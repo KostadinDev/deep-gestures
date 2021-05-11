@@ -28,10 +28,12 @@ The data processing script network_training/process_data.py converts the output 
 2. Open the network training folder
 	cd network_training/
 3. For each different gesture run the command below specifying the collected data, where to save the processed output, and the label of the gesture. Keep in mind the label should be numeric. There are example files in network_training/collected_data and network_training/processed_data.
-	python process_data.py <collected_data.csv> <saving_location> <label>
+	To process data, run: python process_data.py <collected_data.csv> <saving_location> <label>
 	
 	Example:
 		python process_data.py collected_data/collected_LRdash.csv processed_data/processed_LRdash.npy 0
+		
+	Note: process_data.py takes additional optional args <data_format> and <data_augment_flag>, where <data_format> is either 'Category' or 'MAGICWAND' to accomodate for the 2 different formats of csv data we currently have, and <data_augment_flag> is a boolean either True or False telling the program to perform data augmentation on the input.
 
 
 ## Train Model
