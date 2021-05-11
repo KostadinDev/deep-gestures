@@ -1,6 +1,9 @@
 READ ME
 
-# Gesture Recognition Pipeline
+# If the instructions below aren't clear enough or you would prefer a live demo, please contact one of us via email
+
+
+# Gesture Recognition Pipeline 
 
 Complete pipeline to create an application that can recognize custom gestures made on an Arduino Nano BLE Sense.
 
@@ -8,19 +11,19 @@ The gestures are detected with deep learning using accelerometer data.
 
 The pipeline includes data collection on an Arduino, data processing, neural network training, model conversion, model deployment on Arduino. Additionally, there is a section on how to send the predicted gestures to a server via bluetooth.
 
-## Collect Data
+## Collect Data (Requires Arduino)
 
 In order to collect data, we used a basic triggering system in order to tell the arduino when to
 collect the data. From there it was printed to the Serial Port, detected and saved as a csv using PuTTY.
 
-### Steps
+### Steps	(Requires Arduino)
 1. Using an Arduino Nano 33 BLE Sense and a button, create a circuit that will connect the vOut pin to an input datapin whenever the button is depressed. This acts as a trigger for the start of the movement.
 2. Run the script provided within 'datacollection'. This script prints the output of the IMU within the Arduino Nano to the Serial Monitor.
 3. Download Putty, setting the 'Connection Type' to 'Serial', the 'Serial line' box to the same 
 Serial Port that the Arduino Nano is set to, and the 'Speed' to your Arduino Nano's 'Baud Rate'
 4.  Collect Data and save it within a csv file.
 
-## Process Data
+## Process Data		(TAs can begin here)
 The data processing script network_training/process_data.py converts the output of the Arduino sensors into numpy arrays that are later used to train the machine learning model.
 
 ### Steps:
@@ -29,9 +32,10 @@ The data processing script network_training/process_data.py converts the output 
 	cd network_training/
 3. For each different gesture run the command below specifying the collected data, where to save the processed output, and the label of the gesture. Keep in mind the label should be numeric. There are example files in network_training/collected_data and network_training/processed_data.
 	To process data, run: python process_data.py <collected_data.csv> <saving_location> <label>
-	
+	- The Labels we used were 0, 1, 2, 3, 4 for 'O', 'LR', 'RL', 'spin', and 'throw' respectively
 	Example:
-		python process_data.py collected_data/collected_LRdash.csv processed_data/processed_LRdash.npy 0
+		python process_data.py collected_data/Category_O.csv processed_data/processed_O.npy 0
+		- Notice the label is 0 in this case 
 		
 	Note: process_data.py takes additional optional args <data_format> and <data_augment_flag>, where <data_format> is either 'Category' or 'MAGICWAND' to accomodate for the 2 different formats of csv data we currently have, and <data_augment_flag> is a boolean either True or False telling the program to perform data augmentation on the input.
 
@@ -46,12 +50,15 @@ By this point you should have a folder with processed data with .npy files. Now 
     	python train.py <processed_data_folder> <model_saving_location_folder> <0 or 1>
     	-To save as a .h5 file, the last argument should be 0
 	-To save as a .tflite file, the argument should be 1
+	
 	Or for the fine tuned model:
 
 	python evaluation.py <processed_data_folder> <model_saving_location_folder>
 
 	Example:
 		python train.py processed_data/ lite_models/ 0
+
+## After this requires Arduino, TAs can stop here
 
 ## Model Conversion
 After obtaining the Tensforflow Lite model as a “.tflite” file you have to convert it to a c++ file and put it in your Arduino project.
