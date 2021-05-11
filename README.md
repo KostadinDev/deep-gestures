@@ -53,10 +53,13 @@ By this point you should have a folder with processed data with .npy files. Now 
 	
 	Or for the fine tuned model:
 
-	python evaluation.py <processed_data_folder> <model_saving_location_folder>
+	python train_fine_tune.py <data_folder> <model_input> <model_output>
 
 	Example:
 		python train.py processed_data/ lite_models/ 0
+	
+	Example fine-tune:
+		python train_fine_tune.py network_training/models/model_person_A.h5 network_training/models/model_person_B.h5
 
 ## After this requires Arduino, TAs can stop here
 
