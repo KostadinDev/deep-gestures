@@ -10,6 +10,9 @@ import sys
 from sklearn.metrics import f1_score, precision_score, recall_score, classification_report
 
 
+# This file is intended to train a model on a CNN network and then save the model
+
+
 if __name__ == '__main__':
 
     data_folder, model_output, file_type = sys.argv[1:4]
@@ -81,6 +84,7 @@ if __name__ == '__main__':
     # Create count of the number of epochs
     # epoch_count = range(1, len(training_loss) + 1)
     
+    #Uncomment if you wish to plot accuracy and loss vs epochs
 
     # # Visualize loss history
     # plt.plot(epoch_count, training_loss, 'r--')

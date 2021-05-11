@@ -41,4 +41,5 @@ if __name__ == '__main__':
     y_pred = np.argmax(model.predict(X), axis=1)
 
     # Prints a Metric Report of the model
-    print(classification_report(y, y_pred, target_names=['0','1','2']))
+
+    # print(classification_report(y, y_pred, target_names=['0','1','2','3','4']))
