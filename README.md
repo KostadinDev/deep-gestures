@@ -1,8 +1,3 @@
-READ ME
-
-# If the instructions below aren't clear enough or you would prefer a live demo, please contact one of us via email
-
-
 # Gesture Recognition Pipeline 
 
 Complete pipeline to create an application that can recognize custom gestures made on an Arduino Nano BLE Sense.
