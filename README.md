@@ -6,19 +6,19 @@ The gestures are detected with deep learning using accelerometer data.
 
 The pipeline includes data collection on an Arduino, data processing, neural network training, model conversion, model deployment on Arduino. Additionally, there is a section on how to send the predicted gestures to a server via bluetooth.
 
-## Collect Data (Requires Arduino)
+## Collect Data
 
 In order to collect data, we used a basic triggering system in order to tell the arduino when to
 collect the data. From there it was printed to the Serial Port, detected and saved as a csv using PuTTY.
 
-### Steps	(Requires Arduino)
+### Steps
 1. Using an Arduino Nano 33 BLE Sense and a button, create a circuit that will connect the vOut pin to an input datapin whenever the button is depressed. This acts as a trigger for the start of the movement.
 2. Run the script provided within 'datacollection'. This script prints the output of the IMU within the Arduino Nano to the Serial Monitor.
 3. Download Putty, setting the 'Connection Type' to 'Serial', the 'Serial line' box to the same 
 Serial Port that the Arduino Nano is set to, and the 'Speed' to your Arduino Nano's 'Baud Rate'
 4.  Collect Data and save it within a csv file.
 
-## Process Data		(TAs can begin here)
+## Process Data	
 The data processing script network_training/process_data.py converts the output of the Arduino sensors into numpy arrays that are later used to train the machine learning model.
 
 ### Steps:
@@ -55,8 +55,6 @@ By this point you should have a folder with processed data with .npy files. Now 
 	
 	Example fine-tune:
 		python train_fine_tune.py network_training/models/model_person_A.h5 network_training/models/model_person_B.h5
-
-## After this requires Arduino, TAs can stop here
 
 ## Model Conversion
 After obtaining the Tensforflow Lite model as a “.tflite” file you have to convert it to a c++ file and put it in your Arduino project.
