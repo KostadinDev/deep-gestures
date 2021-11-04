@@ -1,4 +1,4 @@
-# Gesture Recognition Pipeline
+# Gesture Recognition Pipeline 
 
 Complete pipeline to create an application that can recognize custom gestures made on an Arduino Nano BLE Sense.
 
@@ -12,26 +12,27 @@ In order to collect data, we used a basic triggering system in order to tell the
 collect the data. From there it was printed to the Serial Port, detected and saved as a csv using PuTTY.
 
 ### Steps
-1. Using an Arduino Nano 33 BLE Sense and a button, create a circuit that will connect the vOut pin
-to an input datapin whenever the button is depressed. This acts as a trigger for the start of the movement.
-2. Run the script provided within 'datacollection'. This script prints the output of the IMU within the
-Arduino Nano to the Serial Monitor.
+1. Using an Arduino Nano 33 BLE Sense and a button, create a circuit that will connect the vOut pin to an input datapin whenever the button is depressed. This acts as a trigger for the start of the movement.
+2. Run the script provided within 'datacollection'. This script prints the output of the IMU within the Arduino Nano to the Serial Monitor.
 3. Download Putty, setting the 'Connection Type' to 'Serial', the 'Serial line' box to the same 
 Serial Port that the Arduino Nano is set to, and the 'Speed' to your Arduino Nano's 'Baud Rate'
 4.  Collect Data and save it within a csv file.
 
-## Process Data
-The data processing script <b>network_training/format_data.py</b> converts the output of the Arduino sensors into numpy arrays that are later used to train the machine learning model.
+## Process Data	
+The data processing script network_training/process_data.py converts the output of the Arduino sensors into numpy arrays that are later used to train the machine learning model.
 
 ### Steps:
 1. Put the collected data csv files in network_training/collected_data
 2. Open the network training folder
-	>cd network_training/
-3. For each different gesture run the command below specifying th collected data, where to save the processed output, and  the label of the gesture. Keep in mind the label should be numeric. There are example files in network_training/collected_data and network_training/processed_data.
-	>python format_data.py <collected_data_csv> <saving_location> \<label>
-	
+	cd network_training/
+3. For each different gesture run the command below specifying the collected data, where to save the processed output, and the label of the gesture. Keep in mind the label should be numeric. There are example files in network_training/collected_data and network_training/processed_data.
+	To process data, run: python process_data.py <collected_data.csv> <saving_location> <label>
+	- The Labels we used were 0, 1, 2, 3, 4 for 'O', 'LR', 'RL', 'spin', and 'throw' respectively
 	Example:
-	>python format_data.py collected_data/collected_LRdash.csv processed_data/processed_LRdash.npy 0
+		python process_data.py collected_data/Category_O.csv processed_data/processed_O.npy 0
+		- Notice the label is 0 in this case 
+		
+	Note: process_data.py takes additional optional args <data_format> and <data_augment_flag>, where <data_format> is either 'Category' or 'MAGICWAND' to accomodate for the 2 different formats of csv data we currently have, and <data_augment_flag> is a boolean either True or False telling the program to perform data augmentation on the input.
 
 
 ## Train Model
@@ -39,15 +40,24 @@ By this point you should have a folder with processed data with .npy files. Now 
  
 ### Steps:
 1. Open the network training folder
-	>cd network_training/
+	cd network_training/
 2. Run the training script
-    >python train.py <processed_data_folder> <model_saving_location_folder> \<label>
-    
+    	python train.py <processed_data_folder> <model_saving_location_folder> <0 or 1>
+    	-To save as a .h5 file, the last argument should be 0
+	-To save as a .tflite file, the argument should be 1
+	
+	Or for the fine tuned model:
+
+	python train_fine_tune.py <data_folder> <model_input> <model_output>
+
 	Example:
-	>python train.py processed_data/ lite_models/
+		python train.py processed_data/ lite_models/ 0
+	
+	Example fine-tune:
+		python train_fine_tune.py network_training/models/model_person_A.h5 network_training/models/model_person_B.h5
 
 ## Model Conversion
-After obtaining the Tensforflow Lite model as .tflite file you have to convert it to a c++ file and put it in your Arduino project.
+After obtaining the Tensforflow Lite model as a “.tflite” file you have to convert it to a c++ file and put it in your Arduino project.
 
 ### Steps:
 1. Place the folder with tensorflow lite models in Google Drive
@@ -59,8 +69,7 @@ After obtaining the Tensforflow Lite model as .tflite file you have to convert i
 
 ## Deployment
 
-For Deployment are running a script similar to the datacollection script. The input in discrete chunks
-using a button trigger, interpolated linearly, and then inferenced.
+For Deployment, we are running a script similar to the data collection script. The input in discrete chunks using a button trigger, interpolated linearly, and then inferenced.
 
 ### Steps
 1. Use the exact same circuit at the one used within the data collection phase.
@@ -69,14 +78,13 @@ using a button trigger, interpolated linearly, and then inferenced.
 4. The arduino editor should open up with four tabs:
     - 'arduino-imp.ino' - This is the main script that will be uploaded
     - 'primer.h' - header file for primer.cpp file that outlines helper methods
-    - 'primer.cpp' - cpp file that contains the linear interpolation funcions and array compiler.
+    - 'primer.cpp' - cpp file that contains the linear interpolation functions and array compiler.
     - 'model.h' - header file that contains the TensorFlowLite model
 5. Upload the code and test.
 
 ## Connect to a computer via bluetooth
 
-We took advantage of the Bluetooth Low-Energy capabilities of the Arduino Nano 33 BLE in conjunction with the Bleak python library
-in order to allow for the Arduino communicate with the outside world.  Our hopes are that the system can be used as a gesture controller 
+We took advantage of the Bluetooth Low-Energy capabilities of the Arduino Nano 33 BLE in conjunction with the Bleak python library in order to allow for the Arduino to communicate with the outside world.  Our hopes are that the system can be used as a gesture controller 
 that can be used to trigger other processes.
 
 ### Steps
@@ -87,3 +95,4 @@ that can be used to trigger other processes.
 5. Copy the address of the Arduino Nano. It should either be `GesturePredictor` or `Arduino`
 6. load the python file `bluetooth\ble-testing` paste in the address detected and check that the Model number matches the model number within the arduino code
 7. Run the ble code via command line and test
+

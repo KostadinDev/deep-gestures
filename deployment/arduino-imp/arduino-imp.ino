@@ -1,5 +1,5 @@
 /**
- * Librariees and outside files
+ * Libraries and outside files
  */
 #include <Arduino_LSM9DS1.h>
 #include <ArduinoBLE.h>
@@ -30,7 +30,7 @@ namespace { // for scope
   TfLiteTensor* input = nullptr;
   TfLiteTensor* output = nullptr;
 
-  constexpr int tensor_arena_size = 15*1024;
+  constexpr int tensor_arena_size = 40*1024;
   uint8_t tensor_arena[tensor_arena_size];
 
 }
@@ -173,10 +173,15 @@ void loop() {
       tOut[i] = i/(float)INPUT_LENGTH * tIn[numData - 1];
     }
 
-    //linear interpolation
-    linInter(xIn, tIn, numData, xOut, tOut, INPUT_LENGTH);
-    linInter(yIn, tIn, numData, yOut, tOut, INPUT_LENGTH);
-    linInter(zIn, tIn, numData, zOut, tOut, INPUT_LENGTH);
+    // //linear interpolation
+    // linInter(xIn, tIn, numData, xOut, tOut, INPUT_LENGTH);
+    // linInter(yIn, tIn, numData, yOut, tOut, INPUT_LENGTH);
+    // linInter(zIn, tIn, numData, zOut, tOut, INPUT_LENGTH);
+
+    // cubic interpolation
+    cubInter(xIn, tIn, numData, xOut, tOut, INPUT_LENGTH);
+    cubInter(yIn, tIn, numData, yOut, tOut, INPUT_LENGTH);
+    cubInter(zIn, tIn, numData, zOut, tOut, INPUT_LENGTH);
 
     //vector printing for visualization
     //printArr("x: ", xIn, INPUT_LENGTH);
