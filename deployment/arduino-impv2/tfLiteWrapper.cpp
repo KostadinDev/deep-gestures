@@ -22,6 +22,7 @@ namespace tflWrapper{
       }
 
       void  TfLiteWrapper:: tfSetup(){
+        tfSetupLogger();
         tfSetupModel();
         tfSetupInterpreter();
         tfAllocateTensors();
@@ -77,7 +78,10 @@ namespace tflWrapper{
        *  tflite setup functions
        */
 
-    //   void tfSetupLogger();
+      void TfLiteWrapper::tfSetupLogger(){
+        static tflite::MicroErrorReporter micro_error_reporter;
+        error_reporter = &micro_error_reporter;
+      }
 
       void TfLiteWrapper::tfSetupModel(){
           model = tflite::GetModel(_modelPtr);
@@ -90,8 +94,9 @@ namespace tflWrapper{
       }
       
     //   void tfSetupResolver();
-
+      
       void TfLiteWrapper::tfSetupInterpreter(){
+          static tflite::AllOpsResolver resolver;
           static tflite::MicroInterpreter static_interpreter(
               model, resolver, tensor_arena, tensor_arena_size, error_reporter);
           interpreter = &static_interpreter;

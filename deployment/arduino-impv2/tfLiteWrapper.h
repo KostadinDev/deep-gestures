@@ -24,9 +24,8 @@ namespace tflWrapper{
       static constexpr int tensor_arena_size = 15*1024;
       uint8_t tensor_arena[tensor_arena_size];
 
-      static tflite::MicroErrorReporter micro_error_reporter;
-      tflite::ErrorReporter* error_reporter = &micro_error_reporter;
-      static tflite::AllOpsResolver resolve
+      tflite::ErrorReporter* error_reporter = nullptr;
+      //static tflite::AllOpsResolver resolver;
 
 
 
@@ -58,7 +57,7 @@ namespace tflWrapper{
       unsigned char * _modelPtr;
 
       // setup tfLite
-        // void tfSetupLogger(); // Unused
+      void tfSetupLogger();
       void tfSetupModel();
         // void tfSetupResolver(); // Unused
       void tfSetupInterpreter();

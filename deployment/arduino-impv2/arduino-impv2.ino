@@ -169,6 +169,7 @@ void setup() {
 }
 
 void loop() {
+  Serial.println("main loop");
   BLE.poll();
   if(digitalRead(SWITCH_PIN) == HIGH && IMU.accelerationAvailable()){
     Serial.println("in switch loop");
