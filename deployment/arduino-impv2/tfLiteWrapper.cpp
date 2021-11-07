@@ -18,7 +18,7 @@ namespace tflWrapper{
      */
     //   tfLiteWrapper();
       TfLiteWrapper::TfLiteWrapper(){
-        Serial.println("tflwrapper success");
+         //
       }
 
       void  TfLiteWrapper:: tfSetup(){
@@ -112,13 +112,18 @@ namespace tflWrapper{
 
       void TfLiteWrapper::tfSetupInput(){
         input = interpreter->input(0);
+        
         if ((input->dims->size != 4) || (input->dims->data[0] != 1) ||
           (input->dims->data[1] != 128) ||
           (input->dims->data[2] != 3) ||
           (input->type != kTfLiteFloat32)) {
+            /*
           TF_LITE_REPORT_ERROR(error_reporter,
                               "Bad input tensor parameters in model");
           return;
+          */
+          while(true)
+            Serial.println("Bad input tensor parameters in model");
         }
       }
 

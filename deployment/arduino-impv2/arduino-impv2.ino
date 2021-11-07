@@ -23,7 +23,7 @@
 // Not sure what this does, but I saw it somewhere
 #define DEBUG 0
 
-tflWrapper::TfLiteWrapper tfl;
+
 
 /*
  * Variable initialization and memory Allocation
@@ -77,12 +77,13 @@ int i;
 // creating BLE com lines
 BLEService gestureService("19B10011-E8F2-537E-4F6C-D104768A1214");
 BLEUnsignedIntCharacteristic gestureCharacteristic("19B10011-E8F2-537E-4F6C-D104768A1214", BLERead | BLEWrite);
-
+tflWrapper::TfLiteWrapper tfl;
 
 /*****************************************
  * SETUP
  ****************************************/
 void setup() {
+  Serial.begin(9600);
   // don't miss serial output
   #if DEBUG
     while(!Serial);
@@ -216,7 +217,8 @@ void loop() {
 
     // combine arrays & load tensor
     hstack(xOut,yOut,zOut,TFin, INPUT_LENGTH);
-    tfl.loadInput(TFin, INPUT_LENGTH);
+    // ***********************************************************
+    // tfl.loadInput(TFin, INPUT_LENGTH);
     /*
     float * in = input->data.f;
     for(int j = 0; j < INPUT_LENGTH; j++){
@@ -232,6 +234,7 @@ void loop() {
 
     // Perform inference
 
+    //************************
     tfl.invokeModel();
     /*
     TfLiteStatus invoke_status = interpreter->Invoke();
@@ -245,7 +248,9 @@ void loop() {
 
     //Output results
     // float *gesture_pred = interpreter->output(0)->data.f;
+    // **************************
     float *gesture_pred = tfl.getOutput();
+    //float gesture_pred[5] = {1, 0, 0, 0, 0};
     Serial.println("Output assigned");
     Serial.print("Prediction 1: ");
     Serial.print(gesture_pred[0]);
