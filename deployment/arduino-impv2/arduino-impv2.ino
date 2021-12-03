@@ -7,6 +7,7 @@
 // tfLite
 #include "tfLiteWrapper.h"
 #include "primer.h"
+#include "output.h"
 /*
 #include <TensorFlowLite.h>
 #include "tensorflow/lite/micro/all_ops_resolver.h" // provides operations used by interpreter
@@ -23,30 +24,6 @@
 // Not sure what this does, but I saw it somewhere
 #define DEBUG 0
 
-
-
-/*
- * Variable initialization and memory Allocation
- */
-/*
-namespace { // for scope
-  tflite::ErrorReporter* error_reporter = nullptr;
-  const tflite::Model* model = nullptr;
-  tflite::MicroInterpreter* interpreter = nullptr;
-  TfLiteTensor* input = nullptr;
-  TfLiteTensor* output = nullptr;
-
-  // constexpr int tensor_arena_size = 15*1024;
-  // uint8_t tensor_arena[tensor_arena_size];
-
-}
-*/
-              //TfLiteTensor* input;
-              //tflite::ErrorReporter* error_reporter = nullptr;
-
-              // Allocate Memory
-              //const int tensor_arena_size = 60*1024;
-              //uint8_t tensor_arena[tensor_arena_size];
 
 /**
  * Data Collection constants
@@ -74,9 +51,6 @@ int delayTime = 10;
 
 int i;
 
-// creating BLE com lines
-BLEService gestureService("19B10011-E8F2-537E-4F6C-D104768A1214");
-BLEUnsignedIntCharacteristic gestureCharacteristic("19B10011-E8F2-537E-4F6C-D104768A1214", BLERead | BLEWrite);
 tflWrapper::TfLiteWrapper tfl;
 
 /*****************************************
@@ -94,57 +68,6 @@ void setup() {
   tfl.loadModel(model_tflite);
   tfl.tfSetup();
 
-  /*
-  // set up logging
-  static tflite::MicroErrorReporter micro_error_reporter;
-  error_reporter = &micro_error_reporter;
-  */
-
-  //set up model
-  //const tflite::Model* 
-  /*
-  model = tflite::GetModel(model_tflite);
-  if(model -> version() != TFLITE_SCHEMA_VERSION){
-    while(true)
-      error_reporter->Report("Model version does not match Schema");
-  }
-  */
-
-  /*
-  // Set up resolver
-  static tflite::AllOpsResolver resolver;
-  */
-
-  // instantiate interpreter
-  /*
-  static tflite::MicroInterpreter static_interpreter(
-      model, resolver, tensor_arena, tensor_arena_size, error_reporter);
-  interpreter = &static_interpreter;
-  */
-
- /*
-  // Allocate tensors (interpreter allocate mem from tensor_arena to the model's tensors
-  TfLiteStatus allocate_status = interpreter->AllocateTensors();
-  if(allocate_status != kTfLiteOk){
-    while(true) 
-      error_reporter -> Report("AllocateTensors() failed");
-  }
-  */
-
-
-
-  // obtain pointer to model's input tensor
-  /*
-    input = interpreter->input(0);
-  if ((input->dims->size != 4) || (input->dims->data[0] != 1) ||
-      (input->dims->data[1] != 128) ||
-      (input->dims->data[2] != 3) ||
-      (input->type != kTfLiteFloat32)) {
-    TF_LITE_REPORT_ERROR(error_reporter,
-                         "Bad input tensor parameters in model");
-    return;
-  }
-  */
 
   // Begin IMU
   if(!IMU.begin()){
@@ -157,16 +80,11 @@ void setup() {
   pinMode(SPIN_PIN, OUTPUT);
   pinMode(THROW_PIN, OUTPUT);
 
-  //initialize BLE comms();
-  BLE.begin();
-  BLE.setLocalName("GesturePredictor");
-  BLE.setAdvertisedService(gestureService);
-  gestureService.addCharacteristic(gestureCharacteristic);
-  BLE.addService(gestureService);
 
-  gestureCharacteristic.writeValue(0);
-  BLE.advertise();
-
+  Wire.begin(4);                // join i2c bus with address #4
+  Wire.onReceive(receiveEvent); // register event
+  Wire.onRequest(requestEvent); // register event
+  Serial.begin(9600);           // start serial for output
 }
 
 void loop() {
@@ -218,97 +136,23 @@ void loop() {
     // combine arrays & load tensor
     hstack(xOut,yOut,zOut,TFin, INPUT_LENGTH);
     // ***********************************************************
-    // tfl.loadInput(TFin, INPUT_LENGTH);
-    /*
-    float * in = input->data.f;
-    for(int j = 0; j < INPUT_LENGTH; j++){
-      for(int k = 0; k < 3; k++){
-          *in = TFin[j][k];
-          in++;
-      }
-    }
-    */
+    tfl.loadInput(TFin, INPUT_LENGTH);
+
 
 
     Serial.println("Tensor Loaded");
 
     // Perform inference
 
-    //************************
+    // run model
     tfl.invokeModel();
-    /*
-    TfLiteStatus invoke_status = interpreter->Invoke();
-        Serial.println("Invoked inference");
-  if (invoke_status != kTfLiteOk) {
-    TF_LITE_REPORT_ERROR(error_reporter, "Invoke failed on index: %d\n");
-    return;
-  } else{
-    Serial.println("Error tets passed");
-    */
 
-    //Output results
-    // float *gesture_pred = interpreter->output(0)->data.f;
-    // **************************
-    float *gesture_pred = tfl.getOutput();
-    //float gesture_pred[5] = {1, 0, 0, 0, 0};
-    Serial.println("Output assigned");
-    Serial.print("Prediction 1: ");
-    Serial.print(gesture_pred[0]);
-    Serial.print("    Prediction 2: ");
-    Serial.print(gesture_pred[1]);
-    Serial.print("    Prediction 3: ");
-    Serial.print(gesture_pred[2]);
-    Serial.print("    Prediction 4: ");
-    Serial.print(gesture_pred[3]);
-    Serial.print("    Prediction 5: ");
-    Serial.println(gesture_pred[4]);
-
-    //writeBLE(gesture_pred);
-    
-    Serial.println("1");
-    if(gesture_pred[0] > .5){
-      analogWrite(O_PIN,gesture_pred[0]*255);
-      gestureCharacteristic.writeValue(1);
-      //digitalWrite(O_PIN, HIGH);
-    }
-    Serial.println("2");
-    if(gesture_pred[1] > .5){
-      analogWrite(LR_PIN,gesture_pred[1]*255);
-      gestureCharacteristic.writeValue(2);
-      //digitalWrite(LR_PIN, HIGH);
-    }
-    Serial.println("3");
-    if(gesture_pred[2] > .5){
-      analogWrite(RL_PIN,gesture_pred[2]*255);
-      gestureCharacteristic.writeValue(3);
-      //digitalWrite(RL_PIN, HIGH);
-    }
-    Serial.println("4");
-    if(gesture_pred[3] > .5){
-      analogWrite(SPIN_PIN,gesture_pred[3]*255);
-      gestureCharacteristic.writeValue(4);
-      //digitalWrite(SPIN_PIN, HIGH);
-    }
-    Serial.println("5");
-    if(gesture_pred[4] > .5){
-      gestureCharacteristic.writeValue(5);
-      digitalWrite(THROW_PIN, HIGH);
-    }
-    Serial.println("6");
-    delay(1000);
-    Serial.println("7");
-    analogWrite(O_PIN,0);
-    Serial.println("8");
-    analogWrite(LR_PIN,0);
-    Serial.println("9");
-    analogWrite(RL_PIN,0);
-    Serial.println("10");
-    analogWrite(SPIN_PIN,0);
-    Serial.println("11");
-    digitalWrite(THROW_PIN,LOW);
-    Serial.println("12");
-
+    // output 
+    float *gesturePred = tfl.getOutput();
+    int pins[5] = {O_PIN, LR_PIN, RL_PIN, SPIN_PIN, THROW_PIN};
+    handleOutput(gesturePred, pins, 5);
     Serial.println("finished");
+  
   }
   delay(delayTime);
 }
@@ -351,4 +195,31 @@ void printArr(String label, float arr[], unsigned int arrSize ){
   }
 */
   Serial.println("done\n\n");
+}
+
+
+// function that executes whenever data is received from master
+// this function is registered as an event, see setup()
+void receiveEvent(int howMany)
+{
+  while(1 < Wire.available()) // loop through all but the last
+  {
+    char c = Wire.read(); // receive byte as a character
+    Serial.print(c);         // print the character
+  }
+  int x = Wire.read();    // receive byte as an integer
+  if(x==1){digitalWrite(D13,HIGH);}
+  else{digitalWrite(13,LOW);}
+
+
+  Serial.println(x);         // print the integer
+}
+
+void requestEvent()
+{
+  Serial.println("requestEvent");
+  //Wire.write(
+  for(int i = 0; i < INPUT_LENGTH; i++){
+    Wire.write(TFin[i][0]);
+  }
 }
