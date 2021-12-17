@@ -96,3 +96,17 @@ that can be used to trigger other processes.
 6. load the python file `bluetooth\ble-testing` paste in the address detected and check that the Model number matches the model number within the arduino code
 7. Run the ble code via command line and test
 
+
+# Wifi Pipeline
+For the 2021 semester, we made many improvements. One of which was the integration of a wifi chip so the board can communicate with an external server.
+
+The code that the server will run is currently at [this github repo](https://github.com/KostadinDev/deep-gestures/commits?author=miguelcmaramara). This was created using the Django framework in python and was not meant for a client to access it.
+The steps to host the server on a local PC:
+1. Create a python environment and download the libraries in the requirements.txt file
+2. Note your ipv4 address using ipconfig.
+3. In the `embeddedML/tutorial/tutorial/settings.py` file, insert your ipv4 into the list of allowed hosts.
+3. Using the command window, navigate to the embeddedML/tutorial directory and run `python manage.py runserver <YOUR_IPV4>`
+4. The server is now hosted. Make sure to change the connecting url within the ESP32 code!
+
+This wifi pipeline will send data collected into an IBM cloudnat database.
+
